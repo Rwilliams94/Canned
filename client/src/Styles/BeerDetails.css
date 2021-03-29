@@ -1,0 +1,36 @@
+.details__box {
+    height: 86vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+  
+  .details__image {
+    height: 30vh;
+  }
+  
+  .details__info-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .details__info-box > p {
+    width: 95vw;
+    font-size: 0.8rem;
+    text-align: center;
+  }
+  
+  .details__small-details {
+    margin: 0;
+    padding: 0;
+    width: 98vw;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .details__small-details > p {
+    margin: 0 10px;
+  }

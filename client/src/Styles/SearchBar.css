@@ -1,0 +1,54 @@
+.search__box {
+    position: relative;
+  }
+  
+  .search__results {
+    width: 100vh;
+    top: 7vh;
+    position: absolute;
+    background-color: dodgerblue;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #00000011;
+  }
+  
+  .search__list-item{
+
+    list-style: none;
+    border: 1px solid #00000011;
+    cursor: pointer;
+    padding: 10px 10px;
+  }
+  
+  .search__list-item:hover {
+    background-color: #0000ff11;
+  }
+  
+/* Brewbox  */
+
+  .searchBrew__box {
+    position: relative;
+  }
+  
+  .searchBrew__results {
+    width: 100vh;
+    top: 7vh;
+    position: absolute;
+    z-index: 2;
+    background-color: dodgerblue;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #00000011;
+  }
+  
+  .searchBrew__list-item{
+
+    list-style: none;
+    border: 1px solid #00000011;
+    cursor: pointer;
+    padding: 10px 10px;
+  }
+  
+  .searchBrew__list-item:hover {
+    background-color: #0000ff11;
+  }

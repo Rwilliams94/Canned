@@ -1,0 +1,40 @@
+.newbeer__main {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: flex-end;
+    width: 100vw;
+    height: 7vh;
+    max-height: 85vh;
+    padding: 0;
+    margin: 0;
+}
+
+.newbeer__link {
+    position: absolute;
+    z-index: 2;
+    width: 100vw;
+    height: 7vh;
+    background: dodgerblue;
+    color: whitesmoke;
+}
+
+.newbeer__search {
+    position: absolute;
+    z-index: 2;
+    width: 100vw;
+    height: 10vh;
+    background: dodgerblue;
+    color: whitesmoke;
+}
+
+.newbeer__activeform {
+    top: 16vh;
+    height: 60vh;
+    position: absolute;
+    z-index: 2;
+    background: cornsilk;
+    width: 98vw;
+    border: lightgray 1px solid;
+}
+

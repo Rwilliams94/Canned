@@ -1,0 +1,10 @@
+.map-marker {
+    width: 10vw;
+}
+
+.map__map-container {
+    text-align: center;
+    position: absolute;
+    z-index: 0;
+    top: 9vh;
+}
