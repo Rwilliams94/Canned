@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom'
 import apiHandler from '../API/apiHandler'
 import withUser from '../Components/Auth/withUser'
+import Rating from '../Components/Rating'
+import ReviewForm from '../Components/Reviews/ReviewForm';
+import ImageScroller from '../Components/ImageScroller';
 import '../Styles/BeerDetails.css'
 
 export class BeerDetails extends Component {
@@ -13,6 +16,10 @@ export class BeerDetails extends Component {
       beer: null,
       userBeers: null,
       alreadyDrunk: false,
+      reviewForm: false,
+      imageForm: false,
+      beerImages: null,
+      beerReviews: null,
     };
 
 
@@ -39,6 +46,33 @@ export class BeerDetails extends Component {
       if (user.beers.includes(this.beerId)) {
         this.setState({alreadyDrunk: true})
       } 
+
+    apiHandler
+    .getBeerImages(this.beerId)
+    .then(response => {
+      if(response.length>0) {
+        this.setState({beerImages: response})
+      } else {
+        this.setState({beerImages: []})
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
+    apiHandler
+    .getBeerReviews(this.beerId)
+    .then(response => {
+      if(response.length>0) {
+        this.setState({beerReviews: response})
+      }  else {
+        this.setState({beerReviews: []})
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
       
   }
 
@@ -57,9 +91,22 @@ export class BeerDetails extends Component {
       .removeUserBeer(this.beerId)
       .then(response => {
         console.log("success");
-        this.setState({alreadyDrunk: !this.state.alreadyDrunk})
+        this.setState({
+          alreadyDrunk: !this.state.alreadyDrunk,
+          reviewForm: false,
+          imageForm: false,
+        })
       })
       .catch(err => console.log(err))
+  }
+
+  handleShowReview = () => {
+    console.log("click");
+    this.setState({reviewForm: !this.state.reviewForm})
+  }
+
+  handleShowImage = () => {
+    this.setState({imageForm: !this.state.imageForm})
   }
 
 
@@ -73,12 +120,39 @@ export class BeerDetails extends Component {
       return <div>One sec, just heading to the bar...</div>;
     }
 
+    if (this.state.beerImages === null) {
+      return <div>One sec, just heading to the bar...</div>;
+    }
+
+    if (this.state.beerReviews === null) {
+      return <div>One sec, just heading to the bar...</div>;
+    }
+
 
 
     const beer = this.state.beer
 
     return (
-      <div>
+      <div className="details__main">
+        <div className="details__link-bar">
+          {this.state.alreadyDrunk ? 
+
+            (
+              <div className="flex-center">
+                <h3>Canned!</h3>
+
+                <div className="details__canned-options">
+                  <h5 onClick={this.handleShowReview}>Review</h5>
+                  <h5 onClick={this.handleRemoveBeer}>un-Can?</h5>
+                  <h5 onClick={this.handleShowImage}>Image</h5>
+                </div>
+              </div>
+            ) : 
+            (<h3 onClick={this.handleAddBeer}>Tried this one before? Can it!</h3> )}
+            {this.state.reviewForm && <ReviewForm  beerName={beer.name} beerId={this.beerId}/>}
+
+        </div>
+
         <div className="details__box">
           <div className="details__image-box">
             <img
@@ -87,11 +161,15 @@ export class BeerDetails extends Component {
               alt="beer"
             />
           </div>
-          <div className="details__info-box">
+          <div className="flex-center details__info-box">
             <h1>{beer.name}</h1>
-            <h2>{beer.description}</h2>
+            <h4>{beer.breweryname}</h4>
             <div className="details__small-details">
+              <Rating rating={beer.rating}/>
               <p>{beer.abv}% ABV</p>
+            </div>
+            <div className="details__description">
+              <p>{beer.description}</p>
             </div>
             <Link
                 exact
@@ -100,9 +178,11 @@ export class BeerDetails extends Component {
               >
                 <h3>Edit this beer</h3> 
             </Link>
-              {this.state.alreadyDrunk ? 
-              (<h3 onClick={this.handleRemoveBeer}>Canned!</h3>) : 
-              (<h3 onClick={this.handleAddBeer}>Tried this one before?</h3> )}
+            {this.state.beerImages.length>0 ? 
+            (<ImageScroller imagesList={this.state.beerImages}/> )
+            :
+            (<h1>The beer has no Can snaps yet!</h1>)
+            }
         
           </div>
         </div>

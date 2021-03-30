@@ -1,7 +1,13 @@
 .star__box {
     height: 30px;
-    width: 100px;
+    width: 25vw;
 
+}
+
+.review__star__box {
+    height: 30px;
+    width: 25vw;
+    color: black;
 }
 
 .empty {

@@ -5,6 +5,7 @@ import NewBeer from './NewBeer';
 import "../Styles/Profile.css";
 // import "../styles/CardItem.css";
 import apiHandler from "../API/apiHandler";
+import ImageScroller from "../Components/ImageScroller";
 
 class Profile extends Component {
   // authContext = this.props.context
@@ -102,7 +103,6 @@ class Profile extends Component {
     //latest photos/reviews/beers
 
     const user = this.state.user;
-    const images = this.state.images.slice(Math.abs(this.state.imageNumber%this.state.images.length), 3);
     const reviews = this.state.reviews.slice(0, 3);
 
     return (
@@ -127,22 +127,7 @@ class Profile extends Component {
         {/* Image scroller */}
 
         <h1>latest images</h1>
-        <div className="image__gallery-box ">
-          <p onClick={this.handlePreviousPhoto}>P</p>
-          <div className="image__gallery-grid">
-          {/* {images.map((image, index) => (
-            
-            <img
-            className="image__gallery-photo"
-            style={{ gridColumn: `${index+1}/3`, gridRow: "1"}}
-            src={image.image}
-            alt={image.beername}
-            />
-          ))
-        } */}
-          </div>
-          <p onClick={this.handleNextPhoto}>N</p>
-        </div>     
+        <ImageScroller imagesList={this.state.images}/> 
 
         <h1>latest reviews</h1>
         <ul>
