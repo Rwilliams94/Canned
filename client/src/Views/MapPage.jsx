@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import MapComponent from "../Components/MapComponent";
 import apiHandler from "../API/apiHandler";
-import BrewSearchBar from "../Components/BrewSearchBar";
+// import BrewSearchBar from "../Components/BrewSearchBar";
 import "../Styles/MapPage.css";
 
 
@@ -24,14 +24,7 @@ export class MapPage extends Component {
       .catch((err) => console.log(err));
   }
 
-  handleBrewerySelect = (brewery) => {
-      console.log(brewery);
-    this.setState({
-      selectedBrewery: brewery,
-      longitude: brewery.longitude,
-      latitude: brewery.latitude,
-    });
-  };
+
 
   render() {
     if (this.state.breweries === null) {
@@ -42,9 +35,6 @@ export class MapPage extends Component {
 
     return (
       <div>
-        <div>
-          <BrewSearchBar onSelect={this.handleBrewerySelect}/>
-        </div>
         <div className="map__map-container">
           <MapComponent breweryList={this.state.breweries} longitude={this.state.longitude} latitude={this.state.latitude}  />
         </div>

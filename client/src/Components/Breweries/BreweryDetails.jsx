@@ -1,11 +1,8 @@
 import React, { Component } from "react";
-import { Link, NavLink } from 'react-router-dom'
-import apiHandler from '../API/apiHandler'
-import withUser from '../Components/Auth/withUser'
-import Rating from '../Components/Rating'
-import ReviewForm from '../Components/Reviews/ReviewForm';
-import ImageScroller from '../Components/ImageScroller';
-import '../Styles/BeerDetails.css'
+import apiHandler from '../../API/apiHandler'
+// import withUser from '../Components/Auth/withUser'
+import Rating from '../../Components/Rating'
+import '../../Styles/BeerDetails.css'
 
 export class BreweryDetails extends Component {
 
@@ -17,19 +14,9 @@ export class BreweryDetails extends Component {
 
 
   componentDidMount() {
-    const breweryId = this.props.breweryId
+    this.setState({brewery: this.props.brewery})
+    const breweryId = this.props.brewery._id
  
-    // get brewery 
-
-    apiHandler
-    .getOneBrewery(breweryId)
-    .then(response => {
-      this.setState({brewery: response})
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-    
     // get brewery beers
 
     apiHandler
@@ -41,6 +28,8 @@ export class BreweryDetails extends Component {
       console.log(err);
     });
   }
+
+
 
   handleAddBeer = () => {
     apiHandler
@@ -128,11 +117,13 @@ export class BreweryDetails extends Component {
 
             <div className="details__description">
               <p>{brewery.description}</p>
-            </div>          
+            </div>     
+
+            <div onClick={this.props.closePopUp}><h2>back to map</h2></div>     
         </div>
       </div>
     );
   }
 }
 
-export default withUser(BeerDetails);
+export default BreweryDetails;

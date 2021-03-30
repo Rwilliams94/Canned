@@ -2,6 +2,33 @@
     width: 10vw;
 }
 
+.map__showname-box {
+    position: absolute;
+    border: 1px black solid;
+    top: 30vh;
+    left: 20vw;
+    z-index: 4;
+    width: 60vw;
+    height: 4vh;
+    background: white;
+    color: black;
+    
+}
+
+.map__show-details-box {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    z-index: 4;
+    background: white;
+    top: 5vh;
+    height: 60vh;
+    width: 98vw;
+    border: solid black 1px;
+}
+
+
 .map__map-container {
     text-align: center;
     position: absolute;
