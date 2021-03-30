@@ -31,12 +31,14 @@ router.post("/", requireAuth, function (req, res, next) {
   const { 
     userid,
     beerid,
+    beername,
     breweryid,
     rating,
     comment,} = req.body;
 
   const newReview = {
     userid,
+    beername,
     beerid,
     breweryid,
     rating,
