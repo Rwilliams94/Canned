@@ -30,7 +30,7 @@ export class ImageScroller extends Component {
 
     render() {
 
-        console.log(this.images);
+
 
         if(this.state.images) {
             return <div>loading images...</div>

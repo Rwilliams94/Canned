@@ -217,6 +217,13 @@ export default {
       .catch(errorHandler);
   },
 
+  getBreweryBeers(breweryId) {
+    return service
+    .get(`/api/brewery/beers/${breweryId}`)
+    .then((res) => res.data)
+    .catch(errorHandler);
+  },
+
   deleteBrewery(breweryId) {
     return service
       .delete(`/api/brewery/delete/${breweryId}`)

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import LocationAutoComplete from "../../LocationAutoComplete";
+import LocationAutoComplete from "../LocationAutoComplete";
 import "../../styles/form.css";
-import api from '../../../API/apiHandler'
+import api from '../../API/apiHandler'
 
 class ItemForm extends Component {
   state = {};

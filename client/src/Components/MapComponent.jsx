@@ -24,6 +24,7 @@ const MapComponent = (props) => {
     accessToken:
       'pk.eyJ1Ijoicm10d2lsbGlhbXMiLCJhIjoiY2ttbThvcXNwMGRyazJ3bGVwdG9sbnRzcSJ9.0R-H-K5vBBYCOD9m6cCxXw'
   });
+  
 
   return (
     <div>
@@ -53,8 +54,10 @@ const MapComponent = (props) => {
           <Marker
             coordinates={[brewery.longitude, brewery.latitude]}
             anchor="bottom"
-            key={brewery._id}>
-             
+            key={brewery._id}
+            onClick={() => this.handleMarkerClick(brewery.longitude, brewery.latitude)}
+            >
+                         
             <img className="map-marker" src={markerUrl} alt="marker" />
             
              

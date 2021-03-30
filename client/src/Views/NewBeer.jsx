@@ -12,8 +12,8 @@ export class NewBeer extends Component {
   static contextType = UserContext;
 
   state = {
-    showSearch: true,
-    showForm: true,
+    showSearch: false,
+    showForm: false,
     selectedBeer: null,
     rating: null,
     name: "",
@@ -103,7 +103,22 @@ export class NewBeer extends Component {
   handleBeerSelect = (beer) => {
     this.setState({
       selectedBeer: beer,
+      showSearch: false,
+      showForm: false
     });
+
+    apiHandler
+    .addUserBeer(beer._id)
+    .then(response => {
+        console.log("success", response);
+    })
+    .catch(err => {
+        console.log(err);
+    })
+
+
+
+
   };
 
   handleBrewerySelect = (brewery) => {

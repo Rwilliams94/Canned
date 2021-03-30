@@ -142,32 +142,45 @@ export class BeerDetails extends Component {
                 <h3>Canned!</h3>
 
                 <div className="details__canned-options">
-                  <h5 onClick={this.handleShowReview}>Review</h5>
-                  <h5 onClick={this.handleRemoveBeer}>un-Can?</h5>
-                  <h5 onClick={this.handleShowImage}>Image</h5>
+                  <h3 onClick={this.handleShowReview}>Review</h3>
+                  <h3 onClick={this.handleRemoveBeer}>un-Can?</h3>
+                 
                 </div>
               </div>
             ) : 
             (<h3 onClick={this.handleAddBeer}>Tried this one before? Can it!</h3> )}
-            {this.state.reviewForm && <ReviewForm  beerName={beer.name} beerId={this.beerId}/>}
+            {this.state.reviewForm && <ReviewForm  beerName={beer.name} beerId={this.beerId} onComplete={this.handleShowReview}/>}
 
         </div>
 
         <div className="details__box">
-          <div className="details__image-box">
-            <img
-              className="details__image"
-              src={beer.image}
-              alt="beer"
-            />
-          </div>
-          <div className="flex-center details__info-box">
-            <h1>{beer.name}</h1>
-            <h4>{beer.breweryname}</h4>
-            <div className="details__small-details">
-              <Rating rating={beer.rating}/>
-              <p>{beer.abv}% ABV</p>
+          <div className="details__top-box">
+            <div className="details__image-box">
+              <img
+                className="details__image"
+                src={beer.image}
+                alt="beer"
+                />
             </div>
+            <div className="details__info-box">
+              <h1>{beer.name}</h1>
+              <h4>{beer.breweryname}</h4>
+              <div className="details__rating" >
+                <Rating rating={beer.rating}/>
+              </div>
+              <p>{beer.abv}% ABV</p>
+              
+            </div>
+          </div>
+          <div className="details__image-scroll">
+            {this.state.beerImages.length>0 ? 
+            (<ImageScroller imagesList={this.state.beerImages}/> )
+            :
+            (<h1>The beer has no Can snaps yet!</h1>)
+            }
+          </div>
+        
+
             <div className="details__description">
               <p>{beer.description}</p>
             </div>
@@ -178,13 +191,18 @@ export class BeerDetails extends Component {
               >
                 <h3>Edit this beer</h3> 
             </Link>
-            {this.state.beerImages.length>0 ? 
-            (<ImageScroller imagesList={this.state.beerImages}/> )
-            :
-            (<h1>The beer has no Can snaps yet!</h1>)
-            }
-        
-          </div>
+
+            <h3>Comments</h3>
+            <ul>
+            {this.state.beerReviews.map(review => (
+              <li>
+                <Rating rating={review.rating}/>
+                <p>{review.comment}</p>
+              </li>
+            ))}
+            </ul>
+
+          
         </div>
       </div>
     );
