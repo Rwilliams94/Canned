@@ -1,3 +1,4 @@
+
 import React from 'react'
 import ReactMapboxGl, { Marker } from 'react-mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -9,7 +10,7 @@ const markerUrl = "https://res.cloudinary.com/dahzswwzk/image/upload/v1617034208
 
 const Map = ReactMapboxGl({
   accessToken:
-    'pk.eyJ1Ijoicm10d2lsbGlhbXMiLCJhIjoiY2ttbThvcXNwMGRyazJ3bGVwdG9sbnRzcSJ9.0R-H-K5vBBYCOD9m6cCxXw'
+    process.env.REACT_APP_MAPBOX_TOKEN
 });
 
 

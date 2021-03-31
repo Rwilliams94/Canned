@@ -3,12 +3,13 @@ import apiHandler from '../../API/apiHandler'
 // import withUser from '../Components/Auth/withUser'
 import Rating from '../../Components/Rating'
 import '../../Styles/BeerDetails.css'
+import BeerList from "../Beers/BeerList";
 
 export class BreweryDetails extends Component {
 
     state = {
       brewery: null,
-      brewryBeers: null,
+      breweryBeers: null,
       beerList: false,
     };
 
@@ -22,6 +23,7 @@ export class BreweryDetails extends Component {
     apiHandler
     .getBreweryBeers(breweryId)
     .then(response => {
+      console.log(response);
       this.setState({breweryBeers: response})
     })
     .catch((err) => {
@@ -55,8 +57,12 @@ export class BreweryDetails extends Component {
       .catch(err => console.log(err))
   }
 
-  handleShowBeers = () => {
-    this.setState({beerList: !this.state.beerList})
+  handleBeerList = () => {
+    this.setState({beerList: true})
+  }
+
+  handleDescription = () => {
+    this.setState({beerList: false})
   }
 
 
@@ -75,26 +81,8 @@ export class BreweryDetails extends Component {
     return (
       <div className="details__main">
 
-        {/* <div className="details__link-bar">
-          {this.state.beerList ? 
-
-            (
-              <div className="flex-center">
-                <h3>Canned!</h3>
-
-                <div className="details__canned-options">
-                  <h3 onClick={this.handleShowReview}>Review</h3>
-                  <h3 onClick={this.handleRemoveBeer}>un-Can?</h3>
-                 
-                </div>
-              </div>
-            ) : 
-            (<h3 onClick={this.handleAddBeer}>Tried this one before? Can it!</h3> )}
-            {this.state.reviewForm && <ReviewForm  beerName={beer.name} beerId={this.beerId} onComplete={this.handleShowReview}/>}
-
-        </div> */}
-
         <div className="details__box">
+        <div onClick={this.props.closePopUp}><h2>back to map</h2></div>
           <div className="details__top-box">
             <div className="details__image-box">
               <img
@@ -114,12 +102,20 @@ export class BreweryDetails extends Component {
               
             </div>
           </div>     
-
-            <div className="details__description">
+          <div className="beer__list-type">
+            <div onClick={this.handleDescription} className="beer__list-switch"><h2>Details</h2></div>
+            <div onClick={this.handleBeerList} className="beer__list-switch"><h2>Beers</h2></div>
+        </div>
+            {this.state.beerList ? (
+              <div>
+                <BeerList beerList={this.state.breweryBeers}/>
+              </div>
+            )
+            : (<div className="details__description">
               <p>{brewery.description}</p>
-            </div>     
+            </div> )}   
 
-            <div onClick={this.props.closePopUp}><h2>back to map</h2></div>     
+                
         </div>
       </div>
     );

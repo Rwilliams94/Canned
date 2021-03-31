@@ -5,6 +5,7 @@ node_modules
 /.pnp
 .pnp.js
 .env
+.env.production
 package-lock.json
 # testing
 /coverage

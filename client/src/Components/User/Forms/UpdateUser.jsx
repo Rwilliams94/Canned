@@ -9,7 +9,9 @@ import UserContext from "../../Auth/UserContext";
 class UpdateUser extends Component {
   static contextType = UserContext;
   state = {
-    user: null,
+    userName: null,
+    email: null,
+    city: null,
     tmpUrl: "",
     httpResponse: null,
     isLoading: true,
@@ -21,7 +23,12 @@ class UpdateUser extends Component {
     apiHandler
       .getUser()
       .then((data) => {
-        this.setState({ user: data, isLoading: false });
+        this.setState({ 
+          userName: data.userName, 
+          email: data.email, 
+          city: data.city, 
+          isLoading: false 
+        });
       })
       .catch((error) => {
         this.setState({
@@ -37,17 +44,17 @@ class UpdateUser extends Component {
   handleChange = (event) => {
     const key = event.target.name;
     const value = event.target.value;
-    this.setState({ user: { ...this.state.user, [key]: value } });
+    this.setState({ [key]: value });
   };
 
   isValidInput = (key) => {
-    if (this.state.user[key] === "") {
+    if (this.state[key] === "") {
       return false;
     } else return true;
   };
 
   checkError = () => {
-    for (const key in this.state.user) {
+    for (const key in this.state) {
       if (this.state[key] === "") {
         return true;
       }
@@ -60,19 +67,24 @@ class UpdateUser extends Component {
 
     const fd = new FormData();
 
-    for (const key in this.state.user) {
-      if (key === "profileImg") continue;
-      fd.append(key, this.state.user[key]);
+    for (const key in this.state) {
+      // if (key === "profileImg") continue;
+      fd.append(key, this.state[key]);
     }
 
-    if (this.imageRef.current.files[0]) {
-      fd.append("profileImg", this.imageRef.current.files[0]);
-    }
+    // if (this.imageRef.current.files[0]) {
+    //   fd.append("profileImg", this.imageRef.current.files[0]);
+    // }
 
     apiHandler
       .editUser(fd)
-      .then((data) => {
-        this.context.setUser(data);
+      .then(() => {
+        
+        apiHandler.getUser()
+        .then( user => {
+            this.context.setUser(user)
+        })
+
         this.setState({
           httpResponse: {
             status: "success",
@@ -99,9 +111,9 @@ class UpdateUser extends Component {
       });
   };
 
-  handleFileSelect = (temporaryURL) => {
-    this.setState({ tmpUrl: temporaryURL });
-  };
+  // handleFileSelect = (temporaryURL) => {
+  //   this.setState({ tmpUrl: temporaryURL });
+  // };
 
   render() {
     const { httpResponse } = this.state;
@@ -113,7 +125,7 @@ class UpdateUser extends Component {
         <form autoComplete="off" className="form" onSubmit={this.handleSubmit}>
           <h1 className="header">Edit your profile</h1>
 
-          <div className="round-image user-image">
+          {/* <div className="round-image user-image">
             <img
               src={this.state.tmpUrl || this.state.user.profileImg}
               alt={this.state.user.userName}
@@ -127,7 +139,7 @@ class UpdateUser extends Component {
             >
               Change profile image
             </UploadWidget>
-          </div>
+          </div> */}
 
           {httpResponse && (
             <FeedBack
@@ -139,11 +151,11 @@ class UpdateUser extends Component {
           <div className="form-group">
             <input
               className="input"
-              id="firstName"
+              id="userName"
               type="text"
-              name="firstName"
+              name="userName"
               onChange={this.handleChange}
-              value={this.state.user.userName}
+              value={this.state.userName}
             />
             {!this.isValidInput("userName") && (
               <p className="input-error">Invalid input</p>
@@ -157,7 +169,7 @@ class UpdateUser extends Component {
               id="email"
               type="email"
               name="email"
-              value={this.state.user.email}
+              value={this.state.email}
               disabled
             />
           </div>
@@ -170,13 +182,13 @@ class UpdateUser extends Component {
               type="text"
               name="city"
               onChange={this.handleChange}
-              value={this.state.user.city}
+              value={this.state.city}
             />
             {!this.isValidInput("city") && (
               <p className="input-error">Invalid input</p>
             )}
           </div>
-          <Button primary disabled={this.checkError()}>
+          <Button primary >
             Save
           </Button>
         </form>

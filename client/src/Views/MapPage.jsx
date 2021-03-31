@@ -37,7 +37,7 @@ export class MapPage extends Component {
     
     axios
     .get(
-      `https://api.mapbox.com/geocoding/v5/mapbox.places/${this.state.userCity}.json?access_token=pk.eyJ1Ijoicm10d2lsbGlhbXMiLCJhIjoiY2ttbThvcXNwMGRyazJ3bGVwdG9sbnRzcSJ9.0R-H-K5vBBYCOD9m6cCxXw`
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/${this.state.userCity}.json?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`
     )
     .then((response) => {
       const result = response.data.features[0];

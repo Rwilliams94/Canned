@@ -5,6 +5,7 @@ import withUser from '../Components/Auth/withUser'
 import Rating from '../Components/Rating'
 import ReviewForm from '../Components/Reviews/ReviewForm';
 import ImageScroller from '../Components/ImageScroller';
+import UpdateBeer from '../Components/Beers/UpdateBeer'
 import '../Styles/BeerDetails.css'
 
 export class BeerDetails extends Component {
@@ -20,6 +21,7 @@ export class BeerDetails extends Component {
       imageForm: false,
       beerImages: null,
       beerReviews: null,
+      showSettings: false,
     };
 
 
@@ -109,6 +111,18 @@ export class BeerDetails extends Component {
     this.setState({imageForm: !this.state.imageForm})
   }
 
+  
+  handleShowSettings = () => {
+    this.setState({
+      showSettings: !this.state.showSettings
+    })
+  }
+
+  handleBeerChange = (newBeer) => {
+    this.setState({
+      beer: newBeer
+    })
+  }
 
   render() {
     
@@ -171,6 +185,17 @@ export class BeerDetails extends Component {
               <p>{beer.abv}% ABV</p>
               
             </div>
+
+                {/* settings */}
+              <h4 onClick={this.handleShowSettings}>settings</h4>
+              {this.state.showSettings && (
+                <div className="flex-center profile__settings-box">
+                  <h2 onClick={this.handleLogout}>Logout</h2>
+                  <h2>Update your profile</h2>
+                  <UpdateBeer beer={this.state.beer} handleChange={this.handleBeerChange} handleClose={this.handleShowSettings}/>
+                </div>
+              )}
+
           </div>
           <div className="details__image-scroll">
             {this.state.beerImages.length>0 ? 

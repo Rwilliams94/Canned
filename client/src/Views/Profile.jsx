@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import withUser from "../Components/Auth/withUser";
 import NewBeer from './NewBeer';
+import UpdateUser from '../Components/User/Forms/UpdateUser'
 import "../Styles/Profile.css";
 // import "../styles/CardItem.css";
 import apiHandler from "../API/apiHandler";
@@ -15,10 +16,8 @@ class Profile extends Component {
     beers: null,
     images: null,
     reviews: null,
-    beerCount: null,
-
-    
- 
+    beerCount: null, 
+    showSettings: false, 
   };
 
   componentDidMount() {
@@ -85,6 +84,12 @@ class Profile extends Component {
       });
   };
 
+  handleShowSettings = () => {
+    this.setState({
+      showSettings: !this.state.showSettings
+    })
+  }
+
   render() {
     if (this.state.user === null) {
       return <div>loading...</div>;
@@ -102,7 +107,7 @@ class Profile extends Component {
       return <div>loading...</div>;
     }
 
-    console.log(this.state.beers);
+    console.log(this.state);
 
     //latest photos/reviews/beers
 
@@ -115,11 +120,11 @@ class Profile extends Component {
         {/* add beer search and form */}
 
         <NewBeer/>
-        <h2 onClick={this.handleLogout}>Logout</h2>
+        
         
         {/* Profile Header */}
         <div className="flex-center profile__header">
-          <h1>Welcome {user.userName}</h1>
+          <h1>Welcome {user.userName} </h1><p onClick={this.handleShowSettings}>settings</p>
           <h2>{user.city}</h2>
           <h2>Beer count: {this.state.beerCount}</h2>
           <Link exact to="/user-beer">
@@ -127,6 +132,15 @@ class Profile extends Component {
           </Link>
 
         </div>
+        {/* settings */}
+
+        {this.state.showSettings && (
+          <div className="flex-center profile__settings-box">
+            <h2 onClick={this.handleLogout}>Logout</h2>
+            <h2>Update your profile</h2>
+            <UpdateUser handleClose={this.handleShowSettings}/>
+          </div>
+        )}
 
         {/* Image scroller */}
 

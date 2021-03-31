@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import apiHandler from "../API/apiHandler";
 import Rating from "../Components/Rating"
+import BeerList from '../Components/Beers/BeerList'
 import '../Styles/Beer.css'
 // import SearchBar from './SearchBar';
 
@@ -57,28 +58,7 @@ export class Beers extends Component {
           <div onClick={this.handleListNormal} className="beer__list-switch"><h2>Latest</h2></div>
           <div onClick={this.handleListRanked} className="beer__list-switch"><h2>Top rated</h2></div>
         </div>
-        <ul className="beer__list">
-          {listType.map((beer) => (
-            <li className="beer__list-item" key={beer._id}>
-              <div className="beer__box">
-                <div className="beer__image-box">
-                  <img
-                    className="beer__image"
-                    src={beer.image}
-                    alt={beer.name}
-                  />
-                </div>
-                <div className="beer__info">
-                <Link exact to={`/beer-detail/${beer._id}`}>
-                  <h3>{beer.name}</h3>
-                </Link>
-                <h4>{beer.breweryname}</h4>
-                <Rating rating={beer.rating} />
-                </div>
-              </div>
-            </li>
-          ))}
-        </ul>
+        <BeerList beerList={listType}/>
       </div>
     );
   }

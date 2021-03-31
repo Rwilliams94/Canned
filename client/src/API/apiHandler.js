@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const service = axios.create({
-  baseURL: "http://localhost:4000",
+  baseURL: process.env.REACT_APP_BACKEND_URL,
   withCredentials: true, // Cookie is sent to client when using this service. (used for session)
 });
 
@@ -75,7 +75,7 @@ export default {
 
   editUser(userUpdate) {
     return service
-      .patch("/api/users/me", userUpdate)
+      .patch("/api/users/edit/me", userUpdate)
       .then((res) => res.data)
       .catch(errorHandler);
   },

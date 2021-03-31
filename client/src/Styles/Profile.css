@@ -6,3 +6,12 @@
     margin: 4vh 0;
 }
 
+.profile__settings-box {
+    position: absolute;
+    width: 98vw;
+    height: 33vh;
+    border: 1px black solid;
+    background: whitesmoke;
+    color: black;
+
+}

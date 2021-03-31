@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/FeedBack.css";
+import "../Styles/FeedBack.css";
 
 const FeedBack = ({ status, message }) => {
   return (
