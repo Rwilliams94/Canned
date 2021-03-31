@@ -1,6 +1,7 @@
 require("dotenv").config();
 require("./../../config/mongodb"); // fetch the db connection
 const Beer = require("../../models/Beer.model"); // fetch the model to validate our user document before insertion (in database)
+const Brewery = require("../../models/Brewery.model")
 const axios = require("axios");
 const breweryData = require('../Data/BeerData');
 
@@ -75,6 +76,24 @@ async function getBeers() {
   }
 }
 
+async function addBreweryID() {
+  try {
+  
+  const beers = await Beer.find();
+
+  beers.forEach(async (beer) =>  {
+      const breweryName = beer.breweryname
+      console.log(breweryName);
+      const brewery = await Brewery.findOne({name: breweryName})
+      console.log(brewery.name);
+      await Beer.findByIdAndUpdate(beer._id, {breweryid: brewery._id})
+  })
+
+  } catch (err) {
+      console.log(err);
+    }
+}
+
 
 async function insertMany() {
   try {
@@ -89,7 +108,8 @@ async function insertMany() {
  }
 
 // addBeerBrewery()
+addBreweryID()
 
-insertMany()
+// insertMany()
 
 // getBeers()

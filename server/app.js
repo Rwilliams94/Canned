@@ -45,7 +45,7 @@ app.use(
  * Routes
  */
 
-const indexRouter = require("./routes/index");
+// const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const authRouter = require("./routes/auth");
 const beerRouter = require("./routes/beer");
@@ -54,12 +54,21 @@ const reviewRouter = require("./routes/review");
 const imageRouter = require("./routes/image");
 
 
-app.use("/", indexRouter);
+// app.use("/", indexRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/beer", beerRouter);
 app.use("/api/brewery", breweryRouter);
 app.use("/api/review", reviewRouter);
 app.use("/api/image", imageRouter);
+
+// ...routes 
+
+if (process.env.NODE_ENV === "production") {
+  app.use("*", (req, res, next) => {
+    // If no routes match, send them the React HTML.
+    res.sendFile(__dirname + "/public/index.html");
+  });
+}
 
 module.exports = app;

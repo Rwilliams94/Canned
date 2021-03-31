@@ -168,7 +168,7 @@ router.get("/images/:id", function (req, res, next) {
 router.get("/beers/:id", function (req, res, next) {
   const currentBreweryId = req.params.id;
 
-  Beer.find({ breweryid: currentBreweryId })
+  Beer.find({ breweryid: currentBreweryId})
     .then((beerData) => {
       return res.status(200).json(beerData);
     })

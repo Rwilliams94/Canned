@@ -1,0 +1,62 @@
+[{
+  "_id": {
+    "$oid": "605f5f0f948dd24304fc4286"
+  },
+  "beers": [
+    {
+      "$oid": "605f5a381f96f63c6c5f427a"
+    },
+    {
+      "$oid": "605f5a381f96f63c6c5f4279"
+    },
+    {
+      "$oid": "605f5a381f96f63c6c5f42a8"
+    },
+    {
+      "$oid": "605f5a381f96f63c6c5f4270"
+    },
+    {
+      "$oid": "605f5a381f96f63c6c5f42be"
+    },
+    {
+      "$oid": "605f5a381f96f63c6c5f426f"
+    },
+    {
+      "$oid": "6064771c38f7f431643f7139"
+    },
+    {
+      "$oid": "6064797f38f7f431643f713a"
+    },
+    {
+      "$oid": "606479b338f7f431643f713b"
+    }
+  ],
+  "profileImg": "https://vignette.wikia.nocookie.net/simpsons/images/1/14/Ralph_Wiggum.png/revision/latest/top-crop/width/360/height/360?cb=20100704163100",
+  "email": "ro@will.com",
+  "userName": "RoBeer",
+  "city": "London",
+  "password": "$2b$10$atL171I5GFrCmdxUdQZ5EOYklw5yuO6Uajs3GyLw3Z1XwngKQLcU.",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6060eb9a1442371f8c035e69"
+  },
+  "beers": [],
+  "profileImg": "https://vignette.wikia.nocookie.net/simpsons/images/1/14/Ralph_Wiggum.png/revision/latest/top-crop/width/360/height/360?cb=20100704163100",
+  "email": "Em@G.com",
+  "userName": "EmmaG",
+  "city": "London",
+  "password": "$2b$10$BsCQwzDhYIw96fveiWGMCeWy0YaFBmGIuzVMrVTGivoOz5Irn7KQe",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "606438696dcb6f3700e35584"
+  },
+  "beers": [],
+  "profileImg": "https://vignette.wikia.nocookie.net/simpsons/images/1/14/Ralph_Wiggum.png/revision/latest/top-crop/width/360/height/360?cb=20100704163100",
+  "email": "test@user.com",
+  "userName": "TestUser",
+  "city": "Paris",
+  "password": "$2b$10$Djl3cG.00GregpOfkNUgb./6BE7a621Qm//28Ys..DJKOOUG6Ce56",
+  "__v": 0
+}]

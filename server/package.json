@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "nodemon ./bin/www"
+    "dev": "nodemon ./bin/www",
+    "build-react": "echo ---- creating react build --- && cd ../client  && npm install && npm run build && cp -r ./build/* ../server/public/ && cd .."
   },
   "dependencies": {
     "axios": "^0.21.1",
