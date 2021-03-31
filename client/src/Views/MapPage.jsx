@@ -4,6 +4,8 @@ import apiHandler from "../API/apiHandler";
 import withUser from '../Components/Auth/withUser'
 import CreateBrewery from '../Components/Breweries/CreateBrewery'
 import axios from 'axios'
+import BrewSearchBar from "../Components/BrewSearchBar";
+import BreweryDetails from "../Components/Breweries/BreweryDetails";
 // import BrewSearchBar from "../Components/BrewSearchBar";
 import "../Styles/MapPage.css";
 
@@ -19,7 +21,9 @@ export class MapPage extends Component {
     userCity: this.userCity,
     longitude: null,
     latitude: null,
-    showForm: false
+    showForm: false,
+    showDetails: false,
+    showName: false,
   };
 
   componentDidMount() {
@@ -48,6 +52,35 @@ export class MapPage extends Component {
       })
     });
   }
+
+  handleShowDetails = () => {
+    this.setState({
+      showDetails: !this.state.showDetails,
+      showName: false,
+    });
+  };
+
+
+  handleBrewerySelect = (brewery) => {
+    this.setState({
+      breweryClicked: brewery,
+      longitude: brewery.longitude,
+      latitude: brewery.latitude,
+      showName: true,
+    });
+  };
+
+  handleMarkerClick = (brewery) => {
+    console.log(brewery);
+
+    this.setState({
+      longitude: brewery.longitude,
+      latitude: brewery.latitude,
+      breweryClicked: brewery,
+      showName: true,
+    });
+  };
+
 
   handleShowForm = () => {
     this.setState({showForm: !this.state.showForm})
@@ -79,8 +112,28 @@ export class MapPage extends Component {
         <div className="map__brewery-form">
           <CreateBrewery />
         </div>}
+        {this.state.showName && (
+        <div
+          onClick={this.handleShowDetails}
+          className="flex-center map__showname-box"
+        >
+          <h3>{this.state.breweryClicked.name}</h3>
+        </div>
+        )}
+        {this.state.showDetails && (
+          <div className="map__show-details-box overflow">
+            <BreweryDetails
+              closePopUp={this.handleShowDetails}
+              brewery={this.state.breweryClicked}
+            />
+          </div>
+        )}
+
+        <div className="map__search-box">
+          <BrewSearchBar onSelect={this.handleBrewerySelect} />
+        </div>
         <div className="map__map-container">
-          <MapComponent breweryList={this.state.breweries} longitude={this.state.longitude} latitude={this.state.latitude}  />
+          <MapComponent markerClick={this.handleMarkerClick} breweryList={this.state.breweries} longitude={this.state.longitude} latitude={this.state.latitude}  />
         </div>
       </div>
     );

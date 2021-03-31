@@ -50,6 +50,7 @@ export default {
   // ------ Searches -------
 
   searchBeers(query) {
+    
     return service
       .get(`/api/beer/find/?name=${query}`)
       .then((res) => res.data)

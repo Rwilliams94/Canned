@@ -23,3 +23,23 @@
    height: 10vh;
 
   }
+
+.image__large-box {
+    position: absolute;
+    z-index: 1;
+    width: 90vw;
+    height: 57vh;
+    top: 25vh;
+    background: black;
+    color: whitesmoke;
+
+}
+
+.image__large-box > h2 {
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.image__large-image {
+    width: 70vw;
+}

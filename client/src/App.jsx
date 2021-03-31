@@ -49,7 +49,8 @@ export class App extends Component {
       <div className="App">
         
       
-        
+        <div className="app__main-block overflow">
+
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/signin" component={SignInPage} />
@@ -66,7 +67,8 @@ export class App extends Component {
           <Route exact path="/beers/edit/:id" component={UpdateBeer} /> */}
           <Route exact path="*" component={Lost} />
         </Switch>
-
+        
+        </div>
       
 
         <NavMain />

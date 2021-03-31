@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import withUser from "../Components/Auth/withUser";
-import NewBeer from './NewBeer';
-import UpdateUser from '../Components/User/Forms/UpdateUser'
-import UpdateReview from '../Components/Reviews/UpdateReview'
+import NewBeer from "./NewBeer";
+import UpdateUser from "../Components/User/Forms/UpdateUser";
+import UpdateReview from "../Components/Reviews/UpdateReview";
 import "../Styles/Profile.css";
 // import "../styles/CardItem.css";
 import apiHandler from "../API/apiHandler";
@@ -17,40 +17,44 @@ class Profile extends Component {
     beers: null,
     images: null,
     reviews: null,
-    beerCount: null, 
+    beerCount: null,
     reviewCLicked: null,
-    showSettings: false, 
+    showSettings: false,
     reviewEdit: false,
+    imageBox: false,
   };
 
   componentDidMount() {
     const { context } = this.props;
     const { user } = context;
 
-    this.setState({ user: user});
+    this.setState({ user: user });
 
-    
     // get user beers
 
     apiHandler
-    .getUserBeers()
-    .then((dbRes) => {
-      this.setState({ 
-        beers: dbRes,
-        beerCount: dbRes.length,
-      });
-    })
-    .catch((err) => console.log(err));
-
-
-
+      .getUserBeers()
+      .then((dbRes) => {
+        this.setState({
+          beers: dbRes,
+          beerCount: dbRes.length,
+        });
+      })
+      .catch((err) => console.log(err));
 
     // get user reviews
 
     apiHandler
       .getUserReviews()
       .then((dbRes) => {
-        this.setState({ reviews: dbRes });
+
+        const list = [...dbRes]
+
+        list.sort((a,b)=> {
+          return b.updated_at - a.updated_at
+        })
+
+        this.setState({reviews: list});
       })
       .catch((err) => console.log(err));
 
@@ -59,36 +63,50 @@ class Profile extends Component {
     apiHandler
       .getUserImages()
       .then((dbRes) => {
-        this.setState({ images: dbRes });
+        const list = [...dbRes]
+
+        list.sort((a,b)=> {
+          return b.updated_at - a.updated_at
+        })
+
+        this.setState({images: list});
       })
       .catch((err) => console.log(err));
   }
 
-  handleNextPhoto = () => {
-    this.setState({imageNumber: this.state.imageNumber+1})
+  handleShowPhoto = () => {
+    this.setState({
+      imageBox: !this.state.imageBox
+    })
   }
+  handleNextPhoto = () => {
+    this.setState({ imageNumber: this.state.imageNumber + 1 });
+  };
 
   handlePreviousPhoto = () => {
-    this.setState({imageNumber: this.state.imageNumber-1})
-  }
+    this.setState({ imageNumber: this.state.imageNumber - 1 });
+  };
 
   handleReviewClicked = (review) => {
-
     this.setState({
       reviewCLicked: review,
       reviewEdit: true,
-
-    })
-  }
+    });
+  };
 
   handleReviewClose = () => {
-    this.setState({reviewEdit: false})
-  }
+    this.setState({ reviewEdit: false });
+  };
 
+  handleShowSettings = () => {
+  this.setState({
+    showSettings: !this.state.showSettings,
+  });
+  };
 
   handleLogout = () => {
     const { context } = this.props;
-
+    
     apiHandler
       .logout()
       .then(() => {
@@ -100,11 +118,7 @@ class Profile extends Component {
       });
   };
 
-  handleShowSettings = () => {
-    this.setState({
-      showSettings: !this.state.showSettings
-    })
-  }
+ 
 
   render() {
     if (this.state.user === null) {
@@ -132,21 +146,19 @@ class Profile extends Component {
 
     return (
       <div className="flex-center profile__main">
-
         {/* add beer search and form */}
 
-        <NewBeer/>
-        
-        
+        <NewBeer />
+
         {/* Profile Header */}
         <div className="flex-center profile__header">
-          <h1>Welcome {user.userName} </h1><p onClick={this.handleShowSettings}>settings</p>
+          <h1>Welcome {user.userName} </h1>
+          <p onClick={this.handleShowSettings}>settings</p>
           <h2>{user.city}</h2>
           <h2>Beer count: {this.state.beerCount}</h2>
           <Link exact to="/user-beer">
-          <h3>Check your beers</h3>
+            <h3>Check your beers</h3>
           </Link>
-
         </div>
         {/* settings */}
 
@@ -154,135 +166,41 @@ class Profile extends Component {
           <div className="flex-center profile__settings-box">
             <h2 onClick={this.handleLogout}>Logout</h2>
             <h2>Update your profile</h2>
-            <UpdateUser handleClose={this.handleShowSettings}/>
+            <UpdateUser handleClose={this.handleShowSettings} />
           </div>
         )}
 
         {/* Image scroller */}
 
-        <h1>latest images</h1>
-        <ImageScroller imagesList={this.state.images}/> 
 
+        <h1>latest images</h1>
+        <ImageScroller imagesList={this.state.images} onSelect={this.handleShowPhoto}/>
+        
         {/* Review list */}
 
         <h1>latest reviews</h1>
         {this.state.reviewEdit && (
           <div className="flex-center profile__settings-box">
             <h2>Update this comment</h2>
-            <UpdateReview review={this.state.reviewCLicked} handleClose={this.handleReviewClose}/>
+            <UpdateReview
+              review={this.state.reviewCLicked}
+              handleClose={this.handleReviewClose}
+            />
           </div>
         )}
         <ul>
-        
           {reviews.map((review) => (
             <li>
               <Link exact to={`/beer-detail/${review.beerid}`}>
-              <h3>
-                {review.beername} score: {review.rating}
-              </h3>
+                <h3>
+                  {review.beername} score: {review.rating}
+                </h3>
               </Link>
               <h4 onClick={() => this.handleReviewClicked(review)}>edit</h4>
               <p>{review.comment}</p>
             </li>
           ))}
         </ul>
-
-        {/* <h2 style={{ fontSize: "1.5rem", marginBottom: "10px" }}>
-          This is profile, it's protected !
-        </h2>
-        <p>
-          Checkout the<b>ProtectedRoute</b> component in
-          <code>./components/ProtectRoute.jsx</code>
-        </p>
-        <a
-          style={{ color: "dodgerblue", fontWeight: "bold" }}
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://reacttraining.com/react-router/web/example/auth-workflow"
-        >
-          React router dom Demo of a protected route
-        </a> */}
-
-        {/* <section className="Profile">
-          <div className="user-image round-image">
-            <img src={user.profileImg} alt={user.firstName} />
-          </div>
-          <div className="user-presentation">
-            <h2>
-              {user.firstName} {user.lastName}
-            </h2>
-            <Link className="link" to="/profile/settings">
-              Edit profile
-            </Link>
-          </div>
-
-          {/* phone number active box */}
-        {/* 
-          {user.phoneNumber ? (
-            <h1>{user.phoneNumber}</h1>
-          ) : (
-            <div className="user-contact">
-              <h4>Add a phone number</h4>
-
-              <form className="form">
-                <div className="form-group">
-                  <label className="label" htmlFor="phoneNumber">
-                    Phone number
-                  </label>
-                  <input
-                    className="input"
-                    id="phoneNumber"
-                    type="text"
-                    name="phoneNumber"
-                    placeholder="Add phone number"
-                  />
-                </div>
-                <button className="form__button">Add phone number</button>
-              </form>
-            </div>
-          )} */}
-
-        {/* Break whatever is belo  */}
-        {/* 
-          {this.state.items === "empty" ? (
-            <div className="CardItem">
-              <div className="item-empty">
-                <div className="round-image">
-                  <img src="/media/personal-page-empty-state.svg" alt="" />
-                </div>
-                <p>You don't have any items :(</p>
-              </div>
-            </div>
-          ) : (
-            <div className="CardItem">
-              <h3>Your items</h3>
-
-            {this.state.items.map(item => (
-              <div className="item" key={item._id}>
-                <div className="round-image">
-                  <img
-                    src={item.image}
-                    alt="item"
-                  />
-                </div>
-                <div className="description">
-                  <h2>{item.name}</h2>
-                  <h4>Quantity: {item.quantity} </h4>
-                  <p>{item.description}</p>
-                  <div className="buttons">
-                    <span>
-                      <button className="btn-secondary">Delete</button>
-                    </span>
-                    <span>
-                      <button className="btn-primary">Edit</button>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            ))}
-            </div>
-          )}
-        </section>  */}
       </div>
     );
   }

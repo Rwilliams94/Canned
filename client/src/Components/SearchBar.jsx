@@ -31,7 +31,9 @@ export class SearchBar extends Component {
       return;
     }
 
-    apiHandler.searchBeers(this.state.search).then((response) => {
+    apiHandler
+    .searchBeers(this.state.search)
+    .then((response) => {
       this.setState({
         results: response,
         isLoading: false,
