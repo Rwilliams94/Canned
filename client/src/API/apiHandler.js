@@ -198,7 +198,7 @@ export default {
 
   editBrewery(breweryId, breweryUpdate) {
     return service
-      .patch(`/api/brewery/edit-beer/${breweryId}`, breweryUpdate)
+      .patch(`/api/brewery/edit/${breweryId}`, breweryUpdate)
       .then((res) => res.data)
       .catch(errorHandler);
   },

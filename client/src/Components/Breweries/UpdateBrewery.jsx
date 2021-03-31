@@ -6,12 +6,12 @@ import UploadWidget from "../UploadWidget";
 import FeedBack from "../FeedBack";
 import apiHandler from "../../API/apiHandler";
 import UserContext from "../Auth/UserContext";
-import BrewSearchBar from "../BrewSearchBar";
+import AddressSearch from "../AddressSearch";
 import ReviewRating from "../Reviews/ReviewRating";
 import { buildFormData } from "../../utils";
 // import "../../styles/form.css";
 
-class UpdateBeer extends Component {
+class UpdateBrewery extends Component {
   static contextType = UserContext 
 
   state = {
@@ -23,7 +23,7 @@ class UpdateBeer extends Component {
 
   componentDidMount() {
     this.setState({
-      beer: this.props.beer,
+      brewery: this.props.brewery,
       isLoading: false
     })
   }
@@ -40,7 +40,6 @@ class UpdateBeer extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     
-      
     const fd = new FormData();
 
     const { httpRespons, ... data } = this.state;
@@ -48,7 +47,7 @@ class UpdateBeer extends Component {
     buildFormData(fd, data)
 
     apiHandler
-      .editBeer(this.props.beer._id, fd)
+      .editBrewery(this.props.brewery._id, fd)
       .then((data) => {
         
         this.setState({
@@ -90,14 +89,15 @@ class UpdateBeer extends Component {
   };
 
  // select brewery
-  
-  handleBrewerySelect = (brewery) => {
-    this.setState({
-      breweryname: brewery.name, 
-      breweryid: brewery._id 
-    });
-  };
 
+ handleAddressSelect = (location) => {
+
+  this.setState({
+      address: location.place_name,
+      longitude: location.geometry.coordinates[0],
+      latitude: location.geometry.coordinates[1],
+  });
+};
 // select stars 
 
 handleAddStars = (rating) => {
@@ -106,45 +106,39 @@ handleAddStars = (rating) => {
     });
 };
 
-handleDeleteBeer = (beerId) => {
-  apiHandler
-  .deleteBeer(beerId)
-  .then(response => {
-    console.log("success", response);
-    this.props.history.push("/beer")
-  })
-  .catch(err => {console.log(err)})
-  
-}
+
+
+
 
   render() {
-    console.log(this.props);
+
 
     const { httpResponse } = this.state;
 
     const {
       name,
       description,
-      abv,
+      website,
       breweryname,
-      releasedate,
-      breweryid,
+      establisheddate,
+      address,
+      latitude,
+      longitude,
       rating,
-      date,
       _id,
 
-    } = this.props.beer;
+    } = this.props.brewery;
 
    
 
     return (
       <section className="form-section">
         <form autoComplete="off" className="form" onSubmit={this.handleSubmit}>
-          <h1 className="header">Edit this can <span onClick={this.props.handleClose}>X</span></h1>
+          <h1 className="header">Edit this brewery <span onClick={this.props.handleClose}>X</span></h1>
 
           <div className="round-image widget-image">
             <img
-              src={this.state.tmpUrl || this.props.beer.image}
+              src={this.state.tmpUrl || this.props.brewery.image}
               alt={name}
             />
           </div>
@@ -192,29 +186,29 @@ handleDeleteBeer = (beerId) => {
           </div>
 
           <div className="form-group">
-            <h2>Current brewery: {breweryname}</h2>
-            <BrewSearchBar onSelect={this.handleBrewerySelect} />
+            <h2>Current brewery address: {address}</h2>
+            <AddressSearch onSelect={this.handleAddressSelect} />
           </div>
 
           <div className="form-group">
             <input
                   className="form__input"
                   onChange={this.handleChange}
-                  defaultValue={abv}
-                  type="number"
-                  name="abv"
-                  id="abv"
+                  defaultValue={website}
+                  type="text"
+                  name="website"
+                  id="website"
                 />
            </div>
           <div className="form-group">
            
             <input
               className="input"
-              id="releasedate"
+              id="establisheddate"
               type="number"
-              name="releasedate"
+              name="establisheddate"
               onChange={this.handleChange}
-              defaultValue={releasedate}
+              defaultValue={establisheddate}
             />
          
           </div>
@@ -223,10 +217,10 @@ handleDeleteBeer = (beerId) => {
           </Button>
         </form>
 
-        <h3>Or, if you're sure... <b onClick={() => this.handleDeleteBeer(_id)}>delete</b> this beer</h3>
+       
       </section>
     );
   }
 }
 
-export default withRouter(UpdateBeer);
+export default withRouter(UpdateBrewery);

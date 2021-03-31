@@ -13,7 +13,8 @@
     "react-mapbox-gl": "^5.1.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
-    "web-vitals": "^1.1.1"
+    "web-vitals": "^1.1.1",
+    "worker-loader": "^3.0.8"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import apiHandler from '../../API/apiHandler'
 // import withUser from '../Components/Auth/withUser'
+import UpdateBrewery from './UpdateBrewery'
 import Rating from '../../Components/Rating'
 import '../../Styles/BeerDetails.css'
 import BeerList from "../Beers/BeerList";
@@ -11,6 +12,7 @@ export class BreweryDetails extends Component {
       brewery: null,
       breweryBeers: null,
       beerList: false,
+      showSettings: false,
     };
 
 
@@ -65,6 +67,18 @@ export class BreweryDetails extends Component {
     this.setState({beerList: false})
   }
 
+  handleShowSettings = () => {
+    this.setState({
+      showSettings: !this.state.showSettings
+    })
+  }
+
+  handleBreweryChange = (newBrewery) => {
+    this.setState({
+      brewery: newBrewery
+    })
+  }
+
 
   render() {
     
@@ -93,6 +107,7 @@ export class BreweryDetails extends Component {
             </div>
             <div className="details__info-box">
               <h1>{brewery.name}</h1>
+              <h4 onClick={this.handleShowSettings}>settings</h4>
               <div className="details__rating" >
                 <Rating rating={brewery.rating}/>
               </div>
@@ -101,7 +116,13 @@ export class BreweryDetails extends Component {
               <p>Check them out {brewery.website}</p>
               
             </div>
-          </div>     
+          </div>  
+
+          {this.state.showSettings && (
+                <div className="overflow settings-box">              
+                  <UpdateBrewery brewery={this.state.brewery} handleChange={this.handlebreweryChange} handleClose={this.handleShowSettings}/>
+                </div>
+              )}   
           <div className="beer__list-type">
             <div onClick={this.handleDescription} className="beer__list-switch"><h2>Details</h2></div>
             <div onClick={this.handleBeerList} className="beer__list-switch"><h2>Beers</h2></div>

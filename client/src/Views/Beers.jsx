@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import apiHandler from "../API/apiHandler";
 import Rating from "../Components/Rating"
 import BeerList from '../Components/Beers/BeerList'
+import withUser from "../Components/Auth/withUser";
 import '../Styles/Beer.css'
 // import SearchBar from './SearchBar';
 
@@ -23,6 +24,11 @@ export class Beers extends Component {
       .then((response) => {
 
         const list = [...response]
+
+        list.sort((a,b)=> {
+          return b.releasedate - a.releasedate
+        })
+
         this.setState({beers: list});
 
         const ranked = response.sort((a,b) => {
@@ -41,6 +47,19 @@ export class Beers extends Component {
     this.setState({normList: false})
 }
 
+handleLogout = () => {
+  const { context } = this.props;
+
+  apiHandler
+    .logout()
+    .then(() => {
+      context.removeUser();
+      this.props.history.push("/");
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
 
 
   render() {
@@ -64,4 +83,4 @@ export class Beers extends Component {
   }
 }
 
-export default Beers;
+export default withUser(Beers);

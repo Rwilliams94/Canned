@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Button from "../../Button";
+import { withRouter } from "react-router-dom";
 import UploadWidget from "../../UploadWidget";
 import FeedBack from "../../FeedBack";
 import apiHandler from "../../../API/apiHandler";
@@ -8,6 +9,7 @@ import UserContext from "../../Auth/UserContext";
 
 class UpdateUser extends Component {
   static contextType = UserContext;
+
   state = {
     userName: null,
     email: null,
@@ -15,6 +17,7 @@ class UpdateUser extends Component {
     tmpUrl: "",
     httpResponse: null,
     isLoading: true,
+
   };
 
   imageRef = React.createRef();
@@ -111,14 +114,25 @@ class UpdateUser extends Component {
       });
   };
 
+  handleDeleteUser = () => {
+    apiHandler
+    .deleteUser()
+    .then(response => {
+      console.log("success", response);
+      this.props.history.push("/")
+    })
+    .catch(err => {console.log(err)})
+    
+  }
   // handleFileSelect = (temporaryURL) => {
   //   this.setState({ tmpUrl: temporaryURL });
   // };
 
   render() {
     const { httpResponse } = this.state;
-
+    
     if (this.state.isLoading) return <div>Loading...</div>;
+    console.log();
 
     return (
       <section className="form-section">
@@ -192,9 +206,11 @@ class UpdateUser extends Component {
             Save
           </Button>
         </form>
+
+        {/* <h3>Or, if you're sure... <b onClick={this.handleDeleteUser}>delete</b> this account</h3> */}
       </section>
     );
   }
 }
 
-export default UpdateUser;
+export default withRouter(UpdateUser);

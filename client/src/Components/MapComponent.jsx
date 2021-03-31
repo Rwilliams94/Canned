@@ -1,10 +1,14 @@
-
-import React from 'react'
 import ReactMapboxGl, { Marker } from 'react-mapbox-gl';
+import React from 'react'
 import 'mapbox-gl/dist/mapbox-gl.css';
+import mapboxgl from 'mapbox-gl';
 import '../Styles/MapPage.css'
 import BreweryDetails from '../Components/Breweries/BreweryDetails';
 import BrewSearchBar from '../Components/BrewSearchBar'
+// @ts-ignore
+// eslint-disable-next-line import/no-webpack-loader-syntax
+mapboxgl.workerClass = require("worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker").default;
+
 // import marker from '../assets/avatar.png'
 const markerUrl = "https://res.cloudinary.com/dahzswwzk/image/upload/v1617034208/Basic_UI_Icon_Pack_-_Flat_map_pointer-512_d9c33w.webp"
 
@@ -58,7 +62,6 @@ export class MapComponent extends React.PureComponent {
   }
 
   handleBrewerySelect = (brewery) => {
-    console.log(brewery);
   this.setState({
     breweryClicked: brewery,
     longitude: brewery.longitude,

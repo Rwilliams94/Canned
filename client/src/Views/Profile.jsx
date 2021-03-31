@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import withUser from "../Components/Auth/withUser";
 import NewBeer from './NewBeer';
 import UpdateUser from '../Components/User/Forms/UpdateUser'
+import UpdateReview from '../Components/Reviews/UpdateReview'
 import "../Styles/Profile.css";
 // import "../styles/CardItem.css";
 import apiHandler from "../API/apiHandler";
@@ -17,7 +18,9 @@ class Profile extends Component {
     images: null,
     reviews: null,
     beerCount: null, 
+    reviewCLicked: null,
     showSettings: false, 
+    reviewEdit: false,
   };
 
   componentDidMount() {
@@ -67,6 +70,19 @@ class Profile extends Component {
 
   handlePreviousPhoto = () => {
     this.setState({imageNumber: this.state.imageNumber-1})
+  }
+
+  handleReviewClicked = (review) => {
+
+    this.setState({
+      reviewCLicked: review,
+      reviewEdit: true,
+
+    })
+  }
+
+  handleReviewClose = () => {
+    this.setState({reviewEdit: false})
   }
 
 
@@ -147,13 +163,25 @@ class Profile extends Component {
         <h1>latest images</h1>
         <ImageScroller imagesList={this.state.images}/> 
 
+        {/* Review list */}
+
         <h1>latest reviews</h1>
+        {this.state.reviewEdit && (
+          <div className="flex-center profile__settings-box">
+            <h2>Update this comment</h2>
+            <UpdateReview review={this.state.reviewCLicked} handleClose={this.handleReviewClose}/>
+          </div>
+        )}
         <ul>
+        
           {reviews.map((review) => (
             <li>
+              <Link exact to={`/beer-detail/${review.beerid}`}>
               <h3>
                 {review.beername} score: {review.rating}
               </h3>
+              </Link>
+              <h4 onClick={() => this.handleReviewClicked(review)}>edit</h4>
               <p>{review.comment}</p>
             </li>
           ))}

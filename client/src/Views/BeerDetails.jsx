@@ -124,6 +124,8 @@ export class BeerDetails extends Component {
     })
   }
 
+  
+
   render() {
     
     if (this.state.user === null) {
@@ -178,6 +180,7 @@ export class BeerDetails extends Component {
             </div>
             <div className="details__info-box">
               <h1>{beer.name}</h1>
+              <h4 onClick={this.handleShowSettings}>settings</h4>
               <h4>{beer.breweryname}</h4>
               <div className="details__rating" >
                 <Rating rating={beer.rating}/>
@@ -187,11 +190,9 @@ export class BeerDetails extends Component {
             </div>
 
                 {/* settings */}
-              <h4 onClick={this.handleShowSettings}>settings</h4>
+     
               {this.state.showSettings && (
-                <div className="flex-center profile__settings-box">
-                  <h2 onClick={this.handleLogout}>Logout</h2>
-                  <h2>Update your profile</h2>
+                <div className="overflow settings-box">              
                   <UpdateBeer beer={this.state.beer} handleChange={this.handleBeerChange} handleClose={this.handleShowSettings}/>
                 </div>
               )}
