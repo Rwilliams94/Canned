@@ -14,8 +14,9 @@ class Profile extends Component {
     user: null,
     beers: null,
     images: null,
-    imageNumber: 0,
     reviews: null,
+    beerCount: null,
+
     
  
   };
@@ -32,7 +33,10 @@ class Profile extends Component {
     apiHandler
     .getUserBeers()
     .then((dbRes) => {
-      this.setState({ beers: dbRes });
+      this.setState({ 
+        beers: dbRes,
+        beerCount: dbRes.length,
+      });
     })
     .catch((err) => console.log(err));
 
@@ -117,7 +121,7 @@ class Profile extends Component {
         <div className="flex-center profile__header">
           <h1>Welcome {user.userName}</h1>
           <h2>{user.city}</h2>
-          <h2>Beer count: {this.state.beers.length}</h2>
+          <h2>Beer count: {this.state.beerCount}</h2>
           <Link exact to="/user-beer">
           <h3>Check your beers</h3>
           </Link>

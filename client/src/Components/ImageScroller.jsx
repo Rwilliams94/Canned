@@ -38,7 +38,8 @@ export class ImageScroller extends Component {
 
         return (
           <div>
-            <div className="image__gallery-box ">
+            {this.state.photos.length === 0 ? (<div><h2>no photos to display</h2></div>) :
+            (<div className="image__gallery-box ">
               <p onClick={this.handlePreviousPhoto}>P</p>
               <div className="image__gallery-grid">
                 <div className="flex-center image__image-box">
@@ -52,7 +53,7 @@ export class ImageScroller extends Component {
                 </div>
               </div>
               <p onClick={this.handleNextPhoto}>N</p>
-            </div>
+            </div>)}
           </div>
         );
     }
