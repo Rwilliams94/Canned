@@ -61,26 +61,21 @@ router.patch("/edit/:id", requireAuth, function (req, res, next) {
   const { 
     userid,
     beerid,
+    beername,
     breweryid,
     rating,
     comment } = req.body;
 
   const updateReview = {
     userid,
+    beername,
     beerid,
     breweryid,
     rating,
     comment }
 
-  Review.findById(reviewId)
-    .then((review) => {
-      if (
-        JSON.stringify(review.userId) !==
-        JSON.stringify(req.session.currentUser)
-      ) {
-        res.send("can't change something you didn't make");
-        return;
-      } else {
+
+
         Review.findByIdAndUpdate(reviewId, updateReview)
           .then((updatedReview) => {
             res.status(200).json(updatedReview);
@@ -88,11 +83,7 @@ router.patch("/edit/:id", requireAuth, function (req, res, next) {
           .catch((err) => {
             res.status(500).json(err);
           });
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+
 });
 
 // ---------------------- Delete review ------------------------------

@@ -22,7 +22,7 @@ router.get("/find/", async (req, res, next) => {
 
   if (req.query.name) {
     const exp = new RegExp(req.query.name);
-    query.name = { $regex: exp }
+    query.name = { $regex: exp, $options: 'i' }
     console.log(query.name);
   }
 
