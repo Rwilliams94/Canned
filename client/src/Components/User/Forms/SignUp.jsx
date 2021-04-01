@@ -33,8 +33,8 @@ class Signup extends Component {
     }
 
     return (
-      <section className="form-section">
-        <header className="header">
+      <section className="auth__form-section">
+        <header className="flex-center auth__header">
           <h1>
             Welcome to Canned!
           </h1>
@@ -42,15 +42,15 @@ class Signup extends Component {
 
         <form
           autoComplete="off"
-          className="form"
+          className="flex-center auth__form"
           onChange={this.handleChange}
           onSubmit={this.handleSubmit}
         >
-          <h2>Let's get you involved</h2>
 
-          <div className="form-group">
+
+          <div className="auth__form-group">
             <input
-              className="input"
+              className="auth__input"
               id="userName"
               type="text"
               name="userName"
@@ -58,10 +58,10 @@ class Signup extends Component {
             />
           </div>
 
-          <div className="form-group">
+          <div className="auth__form-group">
          
             <input 
-              className="input" 
+              className="auth__input" 
               id="email" 
               type="email" 
               name="email" 
@@ -69,22 +69,22 @@ class Signup extends Component {
             />
           </div>
 
-          <div className="form-group">
+          <div className="auth__form-group">
 
             <input
-              className="input"
+              className="auth__input"
               id="password"
               type="password"
               name="password"
-              placeholder="Email Address"
+              placeholder="Password"
             />
           </div>
 
           
-          <div className="form-group">
+          <div className="auth__form-group">
 
             <input
-              className="input"
+              className="auth__input"
               id="city"
               type="text"
               name="city"
@@ -92,13 +92,10 @@ class Signup extends Component {
             />
           </div>
 
-          <button className="btn-submit">Let's go!</button>
+          <button className="auth__btn">
+            <h2>Sign up</h2>
+          </button>
         </form>
-
-        <div className="form-section link">
-          <p>Already a Can Fan? What are you doing here?</p>
-          <Link to="/signin">Log in</Link>
-        </div>
       </section>
     );
   }

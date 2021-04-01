@@ -1,0 +1,139 @@
+.brewDetails__main {
+  position: relative;
+}
+
+.details__link-bar {
+  width: 100vw;
+  font-weight: 200;
+  border-bottom: darkgray 2px solid;
+  background: whitesmoke;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.canned {
+  width: 100vw;
+  color: whitesmoke;
+  height: 7vh;
+  padding: 1vh 0;
+  background: #001f3f;  
+  font-size: 1.5rem;
+}
+
+.can-it {
+ font-size: 1.5rem;
+ font-weight: 300;
+}
+
+.details__canned-options {
+width: 100vw;
+height: 6vh;
+border-top: darkgray 2px solid;
+display: flex;
+align-items: center;
+justify-content: space-evenly;
+}
+
+.details__link-bar-links {
+  width: 50vw;
+  height: 6vh;
+  font-weight: 300;
+}
+
+
+.details__review-form {
+position: absolute;
+z-index: 2;
+width: 100vw;
+height: 30vh;
+top: 12vh;
+background: whitesmoke;
+color: black;
+text-align: center;
+}
+
+.review-comment {
+height: 15vh;
+width: 85vw;
+border: lightskyblue 1px solid;
+border-radius: 20px;
+margin-bottom: 15px;
+}
+
+.brewDetails__box {
+    width: 100vw;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+  }
+  
+.brewDetails__top-box {
+  display: flex;
+  width: 100vw;
+  padding: 1vh 0;
+  justify-content: center;
+  
+
+} 
+
+.brewDetails__image-box {
+  width: 30vw;
+ 
+}
+
+.brewDetails__image {
+    width: 25vw;
+}
+  
+.brewDetails__bottom-box {
+  height: 37vh;
+}
+
+.brewDetails__info-box {
+  width: 60vw;
+
+}
+
+.beername {
+  font-size: 1.3rem
+}
+
+.settings {
+  margin-top: 0.5vh;
+  font-size: 0.6rem;
+}
+
+.back-to {
+  position: fixed;
+  bottom: 16vh;
+  left: 36vw;
+  z-index: 3;
+}
+
+
+  
+.brewDetails__info-box > p {
+  width: 70vw;
+  font-size: 0.8rem;
+  
+}
+
+  .details__image-scroll {
+    padding: 2vh 0;
+  }
+
+  .details__description {
+    width: 90vw;
+    margin: 1vh 0;
+
+  }
+
+  .details__description > p {
+    text-align: center;
+
+  }

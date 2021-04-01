@@ -15,14 +15,21 @@
 .map__showname-box {
     position: absolute;
     border: 1px black solid;
-    top: 42vh;
-    left: 20vw;
+    top: 40vh;
+    left: 15vw;
     z-index: 4;
-    width: 60vw;
+    width: 70vw;
     height: 4vh;
+    font-size: 4vw;
     background: white;
     color: black;
     
+}
+
+.showform {
+    background: whitesmoke;
+    border-bottom: 1px darkgray solid;
+    padding-left: 2vw;
 }
 
 .map__show-details-box {
@@ -32,9 +39,9 @@
     align-items: flex-start;
     z-index: 4;
     background: white;
-    top: 20vh;
-    height: 60vh;
-    width: 98vw;
+    top: 15vh;
+    height: 70vh;
+    width: 100vw;
     border: solid black 1px;
 }
 

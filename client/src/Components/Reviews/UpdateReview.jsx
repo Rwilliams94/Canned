@@ -6,7 +6,7 @@ import apiHandler from "../../API/apiHandler";
 import UserContext from "../Auth/UserContext";
 import ReviewRating from "../Reviews/ReviewRating";
 // import { buildFormData } from "../../utils";
-// import "../../styles/form.css";
+import '../../Styles/Forms.css'
 
 class UpdateBrewery extends Component {
   static contextType = UserContext;
@@ -87,8 +87,8 @@ class UpdateBrewery extends Component {
   
 
     return (
-      <section className="form-section">
-        <form autoComplete="off" className="form" onSubmit={this.handleSubmit}>
+      <section className="reivew__form-main">
+        <form autoComplete="off" className="reivew__form" onSubmit={this.handleSubmit}>
           <h1 className="header">
             Edit your review <span onClick={this.props.handleClose}>X</span>
           </h1>

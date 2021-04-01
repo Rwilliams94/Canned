@@ -44,9 +44,9 @@ export class ImageScroller extends Component {
       })
     }
 
-    handleDeleteBeer = (photoId) => {
+    handleDeleteImage = (photoId) => {
       apiHandler
-      .deleteImage(photoId)
+      .deleteimage(photoId)
       .then(response => {
         console.log("success", response);
         this.props.history.push("/profile")
@@ -69,15 +69,15 @@ export class ImageScroller extends Component {
           <div className="flex-center">
             {this.state.showPhoto && (
             <div className="flex-center image__large-box">
+              <h2 className="thin">{this.state.photoClicked.beername}</h2>
               <img className="image__large-image" src={this.state.photoClicked.image} alt=""/>
-              <h2>{this.state.photoClicked.beername}</h2>
-              <h5>delete this image?</h5>
               <h5 onClick={this.handleShowPhoto}>back</h5>
+              <p className="settings" onClick={this.handleDeleteImage}>delete this image?</p>
             </div>
             )}
             {this.state.photos.length === 0 ? (<div><h2>no photos to display</h2></div>) :
             (<div className="image__gallery-box ">
-              <p onClick={this.handlePreviousPhoto}>P</p>
+              <p onClick={this.handlePreviousPhoto}>{`<`}</p>
               <div className="image__gallery-grid">
                 <div className="flex-center image__image-box" onClick={() => {this.handleShowPhoto(array[num])}}>
                     <img className="image__gallery-photo" src={array[num].image} alt={num}/>
@@ -89,7 +89,7 @@ export class ImageScroller extends Component {
                 {this.state.photos.length > 2 ? <img className="image__gallery-photo" src={array[num+2].image} alt={num+2}/> : ""}
                 </div>
               </div>
-              <p onClick={this.handleNextPhoto}>N</p>
+              <p onClick={this.handleNextPhoto}>{'>'}</p>
             </div>)}
           </div>
         );

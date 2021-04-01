@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.auth__form-section {
+    background-image: url("https://res.cloudinary.com/dahzswwzk/image/upload/v1617268902/29ff82e1a5a83a44e7da363c75329a63_kre2vs.jpg");
+    background-size: cover;
+    height: 90vh;
+}
+
+.auth__header {
+    color: whitesmoke;
+    height: 10vh;
+    width: 100vw;
+
+}
+
+.auth__form {
+    height: 30vh;
+    margin-top: 23vh;
+    color: whitesmoke;
+}
+
+.auth__form-group {
+    height: 5vh;
+    width: 65vw;
+
+}
+
+.auth__input {
+    width: 65vw;
+    background: lightgrey;
+}
+
+.auth__input::placeholder {
+    text-align: center;
+    
+}
+
+.auth__btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.auth__btn > h2 {
+    text-decoration: underline;
+    color: whitesmoke;
+    font-size: 1.2rem;
+    font-weight: 200;
+}
+
+

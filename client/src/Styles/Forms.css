@@ -1,0 +1,138 @@
+/* all */
+
+.form__label {
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: black;
+    width: 83vw;
+    margin: 3px 0;
+  
+  }
+  
+  .form__input {
+    height: 20px;
+    width: 85vw;
+    border: 1px solid #5663ff;
+    border-radius: 20px;
+    margin-bottom: 5px;
+  
+  }
+
+  .form__input-small {
+    height: 20px;
+    width: 35vw;
+    border: 1px solid #5663ff;
+    border-radius: 20px;
+    margin-bottom: 5px;
+  }
+
+
+  
+  .form {
+    margin-top: 1vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100vw;
+  }
+  
+  .form__button {
+    width: 80vw;
+    height: 30px;
+    background: dodgerblue;
+    color: white;
+    border-radius: 20px;
+    font-weight: 700;
+    border: none;
+    margin-top: 1vh;
+  }
+
+  .upload__image {
+      height: 13vh;
+      margin: 15px;
+  }
+/* 
+  .upload__image-box {
+      height: 13vh;
+  } */
+
+  .btn-submit {
+    border: 1px solid #5663ff;
+    color: #5663ff;
+    border-radius: 4px;
+    padding: 10px 22px;
+    cursor: pointer;
+  }
+
+  
+/* Review forms */
+
+.reivew__form-main {
+    position: absolute;
+    z-index: 2;
+    width: 100vw;
+    height: 60vh;
+    top: 14vh;
+    padding: 1vh 0;
+    background: whitesmoke;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border:slategray solid 1px;
+    border-radius: 5px;
+}
+
+.review__form {
+    margin-top: 4vh;
+ height: 30vh;
+ display: flex;
+ align-items: center;
+ flex-direction: column;
+ width: 100vw;
+}
+
+.review__comment {
+    padding: 5px;
+    margin: 1vh 0;
+    width: 90vw;
+    border-radius: 8px;
+    border: 1px solid #5663ff;
+
+}
+
+/* Brewery */
+
+.brewery__form-main {
+    position: absolute;
+    z-index: 2;
+    width: 100vw;
+    height: 80vh;
+    top: 10vh;
+    padding: 1vh 0;
+    background: whitesmoke;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border:slategray solid 1px;
+    border-radius: 5px;
+}
+
+.brewery__form {
+ height: 30vh;
+ display: flex;
+ align-items: center;
+ flex-direction: column;
+ width: 100vw;
+}
+
+.brewery__description {
+    padding: 5px;
+    height: 10vh;
+    width: 85vw;
+    margin: 1vh 0 3vh 0;
+    border-radius: 8px;
+    border: 1px solid #5663ff;
+}

@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import apiHandler from "../API/apiHandler";
-import Rating from "../Components/Rating"
+// import Rating from "../Components/Rating"
 import BeerList from '../Components/Beers/BeerList'
 import withUser from "../Components/Auth/withUser";
+import SearchBar from '../Components/SearchBar'
 import '../Styles/Beer.css'
 // import SearchBar from './SearchBar';
 
@@ -31,7 +32,7 @@ export class Beers extends Component {
 
         this.setState({beers: list});
 
-        const ranked = response.sort((a,b) => {
+        response.sort((a,b) => {
           return b.rating - a.rating
         })
         this.setState({ rankedBeer: response })
@@ -73,10 +74,12 @@ handleLogout = () => {
     return (
       <div className="beer__main-list">
 
+        <SearchBar/>
         <div className="beer__list-type">
-          <div onClick={this.handleListNormal} className="beer__list-switch"><h2>Latest</h2></div>
-          <div onClick={this.handleListRanked} className="beer__list-switch"><h2>Top rated</h2></div>
+          <div onClick={this.handleListNormal} className={`${this.state.normList ? "" : "active"} flex-center beer__list-switch`}><h2 className="thin">Latest</h2></div>
+          <div onClick={this.handleListRanked} className={`${this.state.normList ? "active" : ""} flex-center beer__list-switch`}><h2 className="thin">Top rated</h2></div>
         </div>
+        
         <BeerList beerList={listType}/>
       </div>
     );

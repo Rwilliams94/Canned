@@ -51,28 +51,28 @@ export class SearchBar extends Component {
   render() {
 
     return (
-      <div className="searchBrew__box">
-        <h2>SearchBrew</h2>
+      <div className="search__box">
+        <h2 className="thin">Search</h2>
         <input
-          className="searchBrew__bar"
+          className="search__bar"
           type="text"
           value={this.state.search}
           onChange={this.handleSearch}
           name="searchBrew"
           id="searchBrew"
         />
-        <ul className="searchBrew__results">
+        <ul className="search__results">
           {this.state.results.map((brewery) => (
             <li
               key={brewery._id}
-              className="searchBrew__list-item"
+              className="search__list-item"
               onClick={() => this.handleBreweryClicked(brewery)}
             >
-              <h4>{brewery.name}</h4>
+              <h4 className="thin">{brewery.name}</h4>
             </li>
           ))}
           {this.state.isLoading && (
-            <li className="searchBrew__list-item">Brewery hunting...</li>
+            <li className="search__list-item">Brewery hunting...</li>
           )}
         </ul>
       </div>

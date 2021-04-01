@@ -12,23 +12,23 @@ const Navbar = (props) => {
 
             {context.isLoggedIn && (
         <ul className="nav__list">
-            <li className="nav__link">
+            <li>
                     <NavLink exact to="/beer" className="nav__link">
-                        <div>
+                        <div className="midthin">
                             Beers
                         </div>
                     </NavLink>
             </li>   
-            <li className="nav__link">
-                <NavLink exact to="/map">
-                    <div >
+            <li>
+                <NavLink exact to="/map" className="nav__link middle">
+                    <div className="midthin">
                         Map
                     </div>
                 </NavLink>
             </li>  
-            <li className="nav__link">
+            <li>
                 <NavLink exact to="/profile" className="nav__link">
-                    <div>
+                    <div className="midthin">
                         Profile
                     </div>
                 </NavLink>
@@ -38,10 +38,17 @@ const Navbar = (props) => {
 
                 {!context.isLoggedIn && (
         <ul className="nav__list">
-            <li className="nav__link">
-                <NavLink exact to="/signin">
+            <li >
+                <NavLink exact to="/signin" className="nav__link-half left">
                 <div>
                  Sign In
+                </div>
+                </NavLink> 
+            </li>
+            <li >
+                <NavLink exact to="/signup" className="nav__link-half">
+                <div>
+                 Sign Up
                 </div>
                 </NavLink> 
             </li>

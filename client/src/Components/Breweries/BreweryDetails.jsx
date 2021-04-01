@@ -3,7 +3,7 @@ import apiHandler from '../../API/apiHandler'
 // import withUser from '../Components/Auth/withUser'
 import UpdateBrewery from './UpdateBrewery'
 import Rating from '../../Components/Rating'
-import '../../Styles/BeerDetails.css'
+import '../../Styles/BreweryDetails.css'
 import BeerList from "../Beers/BeerList";
 
 export class BreweryDetails extends Component {
@@ -93,40 +93,43 @@ export class BreweryDetails extends Component {
     const brewery = this.state.brewery
 
     return (
-      <div className="details__main">
+      <div className="brewDetails__main">
 
-        <div className="details__box">
-        <div onClick={this.props.closePopUp}><h2>back to map</h2></div>
-          <div className="details__top-box">
-            <div className="details__image-box">
+        <div className="brewDetails__box">
+        
+           
+          <div className="brewDetails__top-box">
+            <div className="brewDetails__image-box">
               <img
-                className="details__image"
+                className="brewDetails__image"
                 src={brewery.image}
                 alt="brewery"
                 />
             </div>
-            <div className="details__info-box">
-              <h1>{brewery.name}</h1>
-              <h4 onClick={this.handleShowSettings}>settings</h4>
+            <div className="brewDetails__info-box">
+              <h1 className="beername">{brewery.name}</h1>
+              <h5>Established in {brewery.establisheddate}</h5>
               <div className="details__rating" >
                 <Rating rating={brewery.rating}/>
               </div>
-              <h4>Established in {brewery.establisheddate}</h4>
-              <h4>{brewery.address}</h4>
-              <p>Check them out {brewery.website}</p>
+              <p> <a target="_blank" href={brewery.website}>{brewery.website}</a></p>
+              <p className="settings">{brewery.address}</p>
+              <h4 className="settings" onClick={this.handleShowSettings}>settings</h4>
               
             </div>
           </div>  
-
+          
           {this.state.showSettings && (
                 <div className="overflow settings-box">              
                   <UpdateBrewery brewery={this.state.brewery} handleChange={this.handlebreweryChange} handleClose={this.handleShowSettings}/>
                 </div>
               )}   
-          <div className="beer__list-type">
-            <div onClick={this.handleDescription} className="beer__list-switch"><h2>Details</h2></div>
-            <div onClick={this.handleBeerList} className="beer__list-switch"><h2>Beers</h2></div>
+          <div className="details__canned-options">
+            <div onClick={this.handleDescription} className={`${this.state.beerList && "active"} flex-center details__link-bar-links`}><h2>Details</h2></div>
+            <div onClick={this.handleBeerList} className={`${this.state.beerList || "active"} flex-center details__link-bar-links`}><h2>Beers</h2></div>
         </div>
+        <div className="brewDetails__bottom-box overflow">
+
             {this.state.beerList ? (
               <div>
                 <BeerList beerList={this.state.breweryBeers}/>
@@ -135,6 +138,9 @@ export class BreweryDetails extends Component {
             : (<div className="details__description">
               <p>{brewery.description}</p>
             </div> )}   
+
+        </div>
+        <div onClick={this.props.closePopUp}><h2 className="thin back-to">back to map</h2></div>
 
                 
         </div>

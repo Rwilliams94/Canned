@@ -3,7 +3,7 @@ import AddressSearch from "../AddressSearch";
 import ReviewRating from "../../Components/Reviews/ReviewRating";
 import UploadWidget from "../../Components/UploadWidget";
 import UserContext from "../../Components/Auth/UserContext";
-import "../../Styles/NewBeer.css";
+import "../../Styles/Forms.css";
 import apiHandler from "../../API/apiHandler"
 // import apiHandler from '../API/apiHandler'
 
@@ -16,7 +16,7 @@ export class CreateBrewery extends Component {
     name: null,
     description: null,
     website: null,
-    establisheddate: 2021,
+    establisheddate: null,
     address: null,
     latitude: null,
     longitude: null,
@@ -95,9 +95,9 @@ export class CreateBrewery extends Component {
   render() {
 
     return (
-      <div className="newbeer__main">
+      <div className="brewery__form-main">
           <form
-            className="form newbeer__activeform"
+            className="brewery__form"
             onSubmit={this.handleOnSubmit}
           >
             <label className="form__label" htmlFor="name">
@@ -115,15 +115,19 @@ export class CreateBrewery extends Component {
             <label className="form__label" htmlFor="description">
               Description
             </label>
+
+            <div className="form-group">
             <textarea
-              className="form__input"
-              onChange={this.handleChange}
-              value={this.state.description}
+              className="brewery__description"
+              id="description"
               type="text"
               name="description"
-              id="description"
+              value={this.state.comment}
+              placeholder="Describe this home of beer"
+              onChange={this.handleChange}
             ></textarea>
-             
+          </div>
+                   
             <label className="form__label" htmlFor="name">
               Website
             </label>
@@ -136,13 +140,12 @@ export class CreateBrewery extends Component {
               id="website"
             />
 
-            <div className="newbeer__small-details">
 
-              <label className="year__label" htmlFor="year">
+            <label className="form__label" htmlFor="year">
                 Brewery established in
               </label>
               <input
-                className="form__input"
+                className="form__input-small"
                 onChange={this.handleChange}
                 value={this.state.establisheddate}
                 type="number"
@@ -150,8 +153,15 @@ export class CreateBrewery extends Component {
                 id="establisheddate"
               />
 
-              <ReviewRating setRate={this.handleAddStars} />
-            </div>
+            <label className="form__label" htmlFor="rating">
+                Star rating
+            </label>
+
+            <ReviewRating setRate={this.handleAddStars} />
+
+            <label className="form__label" htmlFor="address">
+                Address search
+            </label>
 
             <AddressSearch onSelect={this.handleAddressSelect} />
 
@@ -164,16 +174,16 @@ export class CreateBrewery extends Component {
                 Upload image
               </UploadWidget>
 
-              <div className="newbeer__image">
+              <div className="flex-center">
                 {!this.state.tmpUrl ? (
                   ""
                 ) : (
-                  <img src={this.state.tmpUrl} alt="beer" />
+                  <img className="upload__image" src={this.state.tmpUrl} alt="beer" />
                 )}
               </div>
             </div>
 
-            <button className="form__button">ADD NEW</button>
+            <button className="btn-submit">ADD</button>
           </form>
       </div>
     );

@@ -83,7 +83,10 @@ export class MapPage extends Component {
 
 
   handleShowForm = () => {
-    this.setState({showForm: !this.state.showForm})
+    this.setState({
+      showForm: !this.state.showForm,
+      showName: false
+    })
   }
 
   render() {
@@ -107,7 +110,7 @@ export class MapPage extends Component {
 
     return (
       <div>
-        <h4 onClick={this.handleShowForm}>Can't find your brewery? add it here</h4>
+        
         {this.state.showForm &&
         <div className="map__brewery-form">
           <CreateBrewery />
@@ -121,7 +124,7 @@ export class MapPage extends Component {
         </div>
         )}
         {this.state.showDetails && (
-          <div className="map__show-details-box overflow">
+          <div className="map__show-details-box">
             <BreweryDetails
               closePopUp={this.handleShowDetails}
               brewery={this.state.breweryClicked}
@@ -131,6 +134,7 @@ export class MapPage extends Component {
 
         <div className="map__search-box">
           <BrewSearchBar onSelect={this.handleBrewerySelect} />
+          <h4 className="showform" onClick={this.handleShowForm}>Can't find your brewery? Add it here</h4>
         </div>
         <div className="map__map-container">
           <MapComponent markerClick={this.handleMarkerClick} breweryList={this.state.breweries} longitude={this.state.longitude} latitude={this.state.latitude}  />

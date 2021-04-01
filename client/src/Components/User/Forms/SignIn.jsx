@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import UserContext from "../../Auth/UserContext";
 import apiHandler from "../../../API/apiHandler";
+import '../../../Styles/Auth.css'
 // import "../../styles/form.css";
 
 class Signin extends Component {
@@ -38,21 +39,21 @@ class Signin extends Component {
     }
 
     return (
-      <section className="form-section">
-        <header className="header">
+      <section className="auth__form-section">
+        <header className="flex-center auth__header">
           <h1>
             Welcome back Can Fan
           </h1>
         </header>
 
-        <form autoComplete="off" className="form" onSubmit={this.handleSubmit}>
-          <h2>Login</h2>
+        <form autoComplete="off" className=" flex-center auth__form" onSubmit={this.handleSubmit}>
 
-          <div className="form-group">
+
+          <div className="auth__form-group">
             <input
               onChange={this.handleChange}
               value={this.state.email}
-              className="input"
+              className="auth__input"
               id="email"
               type="email"
               name="email"
@@ -60,11 +61,11 @@ class Signin extends Component {
             />
           </div>
 
-          <div className="form-group">
+          <div className="auth__form-group">
             <input
               onChange={this.handleChange}
               value={this.state.password}
-              className="input"
+              className="auth__input"
               id="password"
               type="password"
               name="password"
@@ -72,13 +73,10 @@ class Signin extends Component {
             />
           </div>
 
-          <button className="btn-submit">Let's go!</button>
+          <button className="auth__btn">
+            <h2>Sign in</h2>
+          </button>
         </form>
-
-        <div className="form-section link">
-          <p>Not yet a fan of the can? </p>
-          <Link to="/signup">Register</Link>
-        </div>
       </section>
     );
   }

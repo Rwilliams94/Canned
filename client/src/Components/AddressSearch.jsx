@@ -69,13 +69,13 @@ class AutocompletePlace extends Component {
     return (
       <div className="AutocompletePlace">
         <input
-          className="input"
+          className="Autocomplete__input"
           type="text"
           value={this.props.defaultValue || this.state.search}
           onChange={this.handleSearchChange}
           placeholder="Type an address"
         />
-        <ul className="AutocompletePlace-results">
+        <ul className="AutocompletePlace-results overflow">
           {results.map((place) => (
             <li
               key={place.id}

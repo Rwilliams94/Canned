@@ -11,23 +11,23 @@ const BeerList = (props) => {
         <div>
         <ul className="beer__list">
           {beerList.map((beer) => (
-            <li className="beer__list-item" key={beer._id}>
-              <div className="beer__box">
-                <div className="beer__image-box">
-                  <img
-                    className="beer__image"
-                    src={beer.image}
-                    alt={beer.name}
-                  />
+            <li className="beer__list-item flex-center" key={beer._id}>
+              <Link exact to={`/beer-detail/${beer._id}`}>
+                <div className="beer__box">
+                  <div className="beer__image-box">
+                    <img
+                      className="beer__image"
+                      src={beer.image}
+                      alt={beer.name}
+                    />
+                  </div>
+                  <div className="beer__info">
+                    <h3>{beer.name}</h3>
+                  <h4>{beer.breweryname}</h4>
+                  <Rating rating={beer.rating} />
+                  </div>
                 </div>
-                <div className="beer__info">
-                <Link exact to={`/beer-detail/${beer._id}`}>
-                  <h3>{beer.name}</h3>
-                </Link>
-                <h4>{beer.breweryname}</h4>
-                <Rating rating={beer.rating} />
-                </div>
-              </div>
+              </Link>
             </li>
           ))}
         </ul>

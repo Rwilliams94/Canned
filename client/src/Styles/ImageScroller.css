@@ -1,14 +1,20 @@
 
 .image__gallery-box {
+    height: 22vh;
+    width: 100vw;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
 
 }
 
+.image__gallery-box > p {
+    text-align: center;
+}
+
 .image__gallery-grid {
-    width: 90vw;
-    height: 10vh;
+    width: 85vw;
+    height: 18vh;
     display: grid;
     grid-gap: 2vw;
     grid-template-columns: repeat(3, 1fr);
@@ -16,11 +22,15 @@
 }
 
 .image__image-box {
-    height: 10vh;
+    height: 17vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
 .image__gallery-photo {
-   height: 10vh;
+   height: 17vh;
 
   }
 
@@ -29,8 +39,8 @@
     z-index: 1;
     width: 90vw;
     height: 57vh;
-    top: 25vh;
-    background: black;
+    top: 5vh;
+    background: #001f3f;
     color: whitesmoke;
 
 }
@@ -41,5 +51,6 @@
 }
 
 .image__large-image {
-    width: 70vw;
+    height: 40vh;
+    margin: 10px;
 }

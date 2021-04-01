@@ -6,7 +6,9 @@
     margin: 0;
     width: 100vw;
     height: 10vh;
-    background: dodgerblue;
+    background: #001f3f;
+
+    box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,7 +16,7 @@
 
 .nav__list {
     display: flex;
-    width: 80vw;
+    width: 100vw;
     align-items: center;
     justify-content: space-between;
     padding: 0;
@@ -26,10 +28,44 @@
   .nav__link {
     display: flex;
     align-items: center;
+    border-top: darkgray double 6px;
+    border-bottom: darkgray solid 2px;
     justify-content: center;
     text-decoration: none;
-    color: white;
-    width: 25vw;
+    color: whitesmoke;
+    width: 33.33vw;
+    height: 10vh;
     font-weight: 600;
     font-size: 1.5rem;
   }
+
+  .nav__link-half {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: darkgray double 6px;
+    border-bottom: darkgray solid 2px;
+    text-decoration: none;
+    color: black;
+    width: 50vw;
+    height: 10vh;
+    font-weight: 600;
+    font-size: 1.5rem;
+  }
+
+/*   
+  .middle {
+    border-left: 2px solid black;
+    border-right: black solid 2px;
+  } */
+  
+  .left {
+    border-right: darkgray solid 2px;
+  }
+
+  .active {
+    background: lightgray;
+    color: black;
+    
+  }
+

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import apiHandler from "../API/apiHandler";
+import { Link } from "react-router-dom";
 import '../Styles/SearchBar.css'
 
 export class SearchBar extends Component {
@@ -46,6 +47,7 @@ export class SearchBar extends Component {
       search: beer.name,
       results: [],
     });
+
     console.log(this.props);
     this.props.onSelect(beer); 
   }
@@ -53,7 +55,7 @@ export class SearchBar extends Component {
   render() {
     return (
       <div className="search__box">
-        <h2>Search</h2>
+        <h2 className="thin">Search</h2>
         <input
           className="search__bar"
           type="text"
@@ -67,9 +69,10 @@ export class SearchBar extends Component {
             <li
               key={beer._id}
               className="search__list-item"
-              onClick={() => this.handleBeerClicked(beer)}
             >
-              <h4>{beer.name} - {beer.breweryname}</h4>
+              <Link exact to={`/beer-detail/${beer._id}`}>
+              <h4 className="thin">{beer.name} - {beer.breweryname}</h4>
+              </Link>
             </li>
           ))}
           {this.state.isLoading && (

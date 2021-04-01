@@ -1,0 +1,16 @@
+.home__main {
+    height: 90vh;
+    width: 100vw;
+    background-image: url("https://res.cloudinary.com/dahzswwzk/image/upload/v1617265888/beerpour_hayzzo.gif");
+    background-size: cover;
+    color: whitesmoke;
+}
+
+.home__title {
+    width: 100vw;
+    /* text-decoration: underline; */
+    font-weight: 300;
+    text-align: center;
+    padding-top: 15vh;
+    font-size: 5.5rem;
+}
