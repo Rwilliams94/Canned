@@ -88,14 +88,14 @@ class UpdateBrewery extends Component {
 
     return (
       <section className="reivew__form-main">
-        <form autoComplete="off" className="reivew__form" onSubmit={this.handleSubmit}>
-          <h1 className="header">
+        <form autoComplete="off" className="reivew__form flex-center" onSubmit={this.handleSubmit}>
+          <h1 className="flex-center">
             Edit your review <span onClick={this.props.handleClose}>X</span>
           </h1>
 
           <div className="form-group">
             <textarea
-              className="input"
+              className="review__comment"
               id="comment"
               type="text"
               name="comment"
@@ -111,7 +111,7 @@ class UpdateBrewery extends Component {
           <Button primary>Save</Button>
         </form>
 
-        <h3>Or, if you're sure... <b onClick={() => this.handleDeleteReview(this.props.review._id)}>delete</b> this review</h3>
+        <h3 className="settings">Or, if you're sure... <b onClick={() => this.handleDeleteReview(this.props.review._id)}>delete</b> this review</h3>
       </section>
     );
   }

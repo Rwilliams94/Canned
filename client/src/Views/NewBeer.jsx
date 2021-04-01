@@ -18,10 +18,10 @@ export class NewBeer extends Component {
     rating: null,
     name: "",
     description: "",
-    abv: 0,
+    abv: null,
     breweryname: "",
     breweryid: null,
-    releasedate: 2021,
+    releasedate: null,
   };
 
   imageRef = React.createRef();
@@ -138,26 +138,28 @@ export class NewBeer extends Component {
     return (
       <div className="newbeer__main">
         <div className="newbeer__link flex-center">
-          <h1 className="" onClick={this.handleSearchClick}>
-            {" "}
+          <h2 className="canned thin flex-center" onClick={this.handleSearchClick}>
             {!this.state.showSearch ? "+" : "-"} Add Beer
-          </h1>
+          </h2>
         </div>
 
         <div>
           {this.state.showSearch && (
             <div className="newbeer__search flex-center">
               <SearchBar onSelect={this.handleBeerSelect} />
-              <h4 onClick={this.handleFormClick}>
+              <h5 className="thin" onClick={this.handleFormClick}>
                 {!this.state.showForm ? "+" : "-"} can't find it? Let's add it
                 to the Canniverse
-              </h4>
+              </h5>
             </div>
           )}
         </div>
         {this.state.showForm && (
+          <div className="beer__form-main">
+
+          
           <form
-            className="form newbeer__activeform"
+            className="beer__form"
             onSubmit={this.handleOnSubmit}
           >
             <label className="form__label" htmlFor="name">
@@ -176,7 +178,7 @@ export class NewBeer extends Component {
               Description
             </label>
             <textarea
-              className="form__input"
+              className="beer__description"
               onChange={this.handleChange}
               value={this.state.description}
               type="text"
@@ -184,8 +186,8 @@ export class NewBeer extends Component {
               id="description"
             ></textarea>
 
-            <div className="newbeer__small-details">
-              <label className="abv__label" htmlFor="abv">
+      
+              <label className="form__label" htmlFor="abv">
                 ABV
               </label>
               <input
@@ -197,7 +199,7 @@ export class NewBeer extends Component {
                 id="abv"
               />
 
-              <label className="year__label" htmlFor="year">
+              <label className="form__label" htmlFor="year">
                 Release date
               </label>
               <input
@@ -209,10 +211,18 @@ export class NewBeer extends Component {
                 id="releasedate"
               />
 
-              <ReviewRating setRate={this.handleAddStars} />
-            </div>
-
+            <label className="form__label" htmlFor="rating">
+                Star rating
+            </label>
+            <ReviewRating setRate={this.handleAddStars} />
+            
+            <label className="form__label" htmlFor="address">
+                Brewery search
+            </label>
+            <div className="beer__form-search flex-center">
+        
             <BrewSearchBar onSelect={this.handleBrewerySelect} />
+            </div>
 
             <div className="newbeer__image-output">
               <UploadWidget
@@ -223,17 +233,18 @@ export class NewBeer extends Component {
                 Upload image
               </UploadWidget>
 
-              <div className="newbeer__image">
+              <div className="flex-center">
                 {!this.state.tmpUrl ? (
                   ""
                 ) : (
-                  <img src={this.state.tmpUrl} alt="beer" />
+                  <img className="upload__image"  src={this.state.tmpUrl} alt="beer" />
                 )}
               </div>
             </div>
 
-            <button className="form__button">ADD NEW</button>
+            <button className="btn-submit">ADD</button>
           </form>
+          </div>
         )}
       </div>
     );

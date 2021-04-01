@@ -52,8 +52,9 @@ h2 {
 
 .settings-box {
   position: absolute;
+  z-index: 3;
   width: 98vw;
-  height: 70vh;
+  height: 60vh;
   border: 1px black solid;
   background: whitesmoke;
   color: black;

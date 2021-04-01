@@ -2,9 +2,25 @@
     position: relative;
 }
 
-.profile__header {
-    margin: 4vh 0;
+.profile__top {
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    left: 0;
 }
+
+.profile__body {
+    position: fixed;
+    top: 7vh;
+    left:0;
+    width: 100vw;
+    height: 84vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+}
+
 
 .profile__settings-box {
     position: absolute;
@@ -14,4 +30,49 @@
     background: whitesmoke;
     color: black;
 
+}
+
+.profile__header {
+    margin-bottom: 4vh;
+}
+
+.profile__review-name {
+    display: flex;
+    width: 90vw;
+    justify-content: center;
+
+}
+
+.profile__reivew-box {
+    width: 50vw;
+}
+
+.profile__beer-city-box {
+    width: 100vw;
+    height: 8vh;
+    background:  #001f3f;
+    color: whitesmoke;
+}
+
+.profile__organiser {
+height: 4vh;
+ width: 100vw;
+ display: flex;
+
+}
+
+.beers__link {
+    width: 100vw;
+    height: 5vh;
+    border-top: black 2px solid;
+    border-bottom: black 2px solid;
+    background: dodgerblue;
+
+
+}
+
+.profile__username {
+    padding-top: 1vh;
+    border-top: black 2px solid;
+    width: 100vw; 
 }

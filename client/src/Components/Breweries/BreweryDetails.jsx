@@ -124,7 +124,7 @@ export class BreweryDetails extends Component {
                   <UpdateBrewery brewery={this.state.brewery} handleChange={this.handlebreweryChange} handleClose={this.handleShowSettings}/>
                 </div>
               )}   
-          <div className="details__canned-options">
+          <div className="brewDetails__canned-options">
             <div onClick={this.handleDescription} className={`${this.state.beerList && "active"} flex-center details__link-bar-links`}><h2>Details</h2></div>
             <div onClick={this.handleBeerList} className={`${this.state.beerList || "active"} flex-center details__link-bar-links`}><h2>Beers</h2></div>
         </div>

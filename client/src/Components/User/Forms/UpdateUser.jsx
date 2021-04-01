@@ -137,23 +137,7 @@ class UpdateUser extends Component {
     return (
       <section className="form-section">
         <form autoComplete="off" className="form" onSubmit={this.handleSubmit}>
-          <h1 className="header">Edit your profile</h1>
-
-          {/* <div className="round-image user-image">
-            <img
-              src={this.state.tmpUrl || this.state.user.profileImg}
-              alt={this.state.user.userName}
-            />
-          </div>
-          <div className="form-group">
-            <UploadWidget
-              ref={this.imageRef}
-              onFileSelect={this.handleFileSelect}
-              name="profileImg"
-            >
-              Change profile image
-            </UploadWidget>
-          </div> */}
+          <h1 className="header">Edit your profile <span onClick={this.props.handleClose}>X</span></h1>
 
           {httpResponse && (
             <FeedBack
@@ -164,12 +148,12 @@ class UpdateUser extends Component {
 
           <div className="form-group">
             <input
-              className="input"
+              className="form__input"
               id="userName"
               type="text"
               name="userName"
               onChange={this.handleChange}
-              value={this.state.userName}
+              defaultValue={this.state.userName}
             />
             {!this.isValidInput("userName") && (
               <p className="input-error">Invalid input</p>
@@ -179,24 +163,24 @@ class UpdateUser extends Component {
           <div className="form-group">
          
             <input
-              className="input"
+              className="form__input"
               id="email"
               type="email"
               name="email"
-              value={this.state.email}
-              disabled
+              defaultValue={this.state.email}
+            
             />
           </div>
 
           <div className="form-group">
            
             <input
-              className="input"
+              className="form__input"
               id="city"
               type="text"
               name="city"
               onChange={this.handleChange}
-              value={this.state.city}
+              defaultValue={this.state.city}
             />
             {!this.isValidInput("city") && (
               <p className="input-error">Invalid input</p>

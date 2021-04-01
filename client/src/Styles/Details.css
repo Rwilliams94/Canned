@@ -114,11 +114,12 @@ margin-bottom: 15px;
 }
 
 .comments {
-  width: 95vw;
+  width: 100vw;
   height: 4vh;
   text-align: center;
   border-bottom: black 1px solid;
-  background: rgb(240, 240, 240);
+  background: #001f3f;
+  color: whitesmoke;
 }
 
 .details__rating {

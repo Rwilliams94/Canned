@@ -4,6 +4,7 @@ import withUser from "../Components/Auth/withUser";
 import NewBeer from "./NewBeer";
 import UpdateUser from "../Components/User/Forms/UpdateUser";
 import UpdateReview from "../Components/Reviews/UpdateReview";
+import Rating from "../Components/Rating";
 import "../Styles/Profile.css";
 // import "../styles/CardItem.css";
 import apiHandler from "../API/apiHandler";
@@ -19,6 +20,7 @@ class Profile extends Component {
     reviews: null,
     beerCount: null,
     reviewCLicked: null,
+    showUserSettings: false,
     showSettings: false,
     reviewEdit: false,
     imageBox: false,
@@ -47,14 +49,13 @@ class Profile extends Component {
     apiHandler
       .getUserReviews()
       .then((dbRes) => {
+        const list = [...dbRes];
 
-        const list = [...dbRes]
+        list.sort((a, b) => {
+          return b.updated_at - a.updated_at;
+        });
 
-        list.sort((a,b)=> {
-          return b.updated_at - a.updated_at
-        })
-
-        this.setState({reviews: list});
+        this.setState({ reviews: list });
       })
       .catch((err) => console.log(err));
 
@@ -63,22 +64,22 @@ class Profile extends Component {
     apiHandler
       .getUserImages()
       .then((dbRes) => {
-        const list = [...dbRes]
+        const list = [...dbRes];
 
-        list.sort((a,b)=> {
-          return b.updated_at - a.updated_at
-        })
+        list.sort((a, b) => {
+          return b.updated_at - a.updated_at;
+        });
 
-        this.setState({images: list});
+        this.setState({ images: list });
       })
       .catch((err) => console.log(err));
   }
 
   handleShowPhoto = () => {
     this.setState({
-      imageBox: !this.state.imageBox
-    })
-  }
+      imageBox: !this.state.imageBox,
+    });
+  };
   handleNextPhoto = () => {
     this.setState({ imageNumber: this.state.imageNumber + 1 });
   };
@@ -99,14 +100,21 @@ class Profile extends Component {
   };
 
   handleShowSettings = () => {
-  this.setState({
-    showSettings: !this.state.showSettings,
-  });
+    this.setState({
+      showSettings: !this.state.showSettings,
+    });
   };
+
+  handleShowUserSettings = () => {
+    this.setState({
+      showUserSettings: !this.state.showUserSettings,
+    });
+  };
+
 
   handleLogout = () => {
     const { context } = this.props;
-    
+
     apiHandler
       .logout()
       .then(() => {
@@ -117,8 +125,6 @@ class Profile extends Component {
         console.log(error);
       });
   };
-
- 
 
   render() {
     if (this.state.user === null) {
@@ -142,65 +148,94 @@ class Profile extends Component {
     //latest photos/reviews/beers
 
     const user = this.state.user;
-    const reviews = this.state.reviews.slice(0, 3);
+    const reviews = this.state.reviews.slice(0, 10);
 
     return (
       <div className="flex-center profile__main">
         {/* add beer search and form */}
-
-        <NewBeer />
-
-        {/* Profile Header */}
-        <div className="flex-center profile__header">
-          <h1>Welcome {user.userName} </h1>
-          <p onClick={this.handleShowSettings}>settings</p>
-          <h2>{user.city}</h2>
-          <h2>Beer count: {this.state.beerCount}</h2>
-          <Link exact to="/user-beer">
-            <h3>Check your beers</h3>
-          </Link>
+        <div className="profile__top">
+          <NewBeer />
         </div>
-        {/* settings */}
-
-        {this.state.showSettings && (
-          <div className="flex-center profile__settings-box">
-            <h2 onClick={this.handleLogout}>Logout</h2>
-            <h2>Update your profile</h2>
-            <UpdateUser handleClose={this.handleShowSettings} />
-          </div>
-        )}
-
-        {/* Image scroller */}
-
-
-        <h1>latest images</h1>
-        <ImageScroller imagesList={this.state.images} onSelect={this.handleShowPhoto}/>
-        
-        {/* Review list */}
-
-        <h1>latest reviews</h1>
-        {this.state.reviewEdit && (
-          <div className="flex-center profile__settings-box">
-            <h2>Update this comment</h2>
-            <UpdateReview
-              review={this.state.reviewCLicked}
-              handleClose={this.handleReviewClose}
-            />
-          </div>
-        )}
-        <ul>
-          {reviews.map((review) => (
-            <li>
-              <Link exact to={`/beer-detail/${review.beerid}`}>
-                <h3>
-                  {review.beername} score: {review.rating}
+        <div className="profile__body overflow">
+          {/* Profile Header */}
+          <div className="flex-center profile__header">
+            <h1 className="flex-center profile__username">{user.userName}</h1>
+            <p className="settings" onClick={this.handleShowUserSettings}>
+              settings
+            </p>
+            <div className="flex-center profile__beer-city-box">
+              <div className="profile__organiser">
+                <h2 className="profile__reivew-box flex-center thin">City</h2>
+                <h2 className="profile__reivew-box flex-center thin">Beers</h2>
+              </div>
+              <div className="profile__organiser">
+                <h3 className="profile__reivew-box flex-center thin">
+                  {user.city}
                 </h3>
-              </Link>
-              <h4 onClick={() => this.handleReviewClicked(review)}>edit</h4>
-              <p>{review.comment}</p>
-            </li>
-          ))}
-        </ul>
+                <h3 className="profile__reivew-box flex-center thin">
+                  {this.state.beerCount}
+                </h3>
+              </div>
+            </div>
+            <div className="flex-center beers__link thin">
+            <Link exact to="/user-beer">
+              <h4 className="">Your Can List </h4>
+            </Link>
+            </div>
+          </div>
+          {/* settings */}
+
+          {this.state.showUserSettings && (
+            <div className="flex-center profile__settings-box">
+              <h2 className="btn-submit" onClick={this.handleLogout}>Logout</h2>
+              <UpdateUser handleClose={this.handleShowUserSettings} />
+            </div>
+          )}
+
+          {/* Image scroller */}
+
+          <h3 className="comments thin flex-center">latest images</h3>
+          <ImageScroller
+            imagesList={this.state.images}
+            onSelect={this.handleShowPhoto}
+          />
+
+          {/* Review list */}
+
+          <h3 className="comments thin flex-center">latest reviews</h3>
+          {this.state.reviewEdit && (
+            <div className="flex-center">
+              <h2>Update this comment</h2>
+              <UpdateReview
+                review={this.state.reviewCLicked}
+                handleClose={this.handleReviewClose}
+              />
+            </div>
+          )}
+          <ul>
+            {reviews.map((review) => (
+              <li className="beer__list-item flex-center">
+                <Link exact to={`/beer-detail/${review.beerid}`}>
+                  <div className="profile__review-name">
+                    <div className="profile__reivew-box flex-center">
+                      <h4>{review.beername} </h4>
+                    </div>
+                    <div className="profile__reivew-box flex-center">
+                      <Rating rating={review.rating} />
+                    </div>
+                  </div>
+                </Link>
+                <p>{review.comment}</p>
+                <p
+                  className="settings"
+                  onClick={() => this.handleReviewClicked(review)}
+                >
+                  edit
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     );
   }

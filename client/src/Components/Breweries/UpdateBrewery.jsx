@@ -119,25 +119,21 @@ handleAddStars = (rating) => {
       name,
       description,
       website,
-      breweryname,
       establisheddate,
       address,
-      latitude,
-      longitude,
-      rating,
-      _id,
-
+ 
     } = this.props.brewery;
 
    
 
     return (
-      <section className="form-section">
-        <form autoComplete="off" className="form" onSubmit={this.handleSubmit}>
-          <h1 className="header">Edit this brewery <span onClick={this.props.handleClose}>X</span></h1>
+      <section className="updatebeer__form-main">
+        <form autoComplete="off" className="brewery__form" onSubmit={this.handleSubmit}>
+          <h3 className="header">Edit this brewery <span onClick={this.props.handleClose}>X</span></h3>
 
-          <div className="round-image widget-image">
+          <div className="flex-center">
             <img
+              className="upload__image"
               src={this.state.tmpUrl || this.props.brewery.image}
               alt={name}
             />
@@ -158,10 +154,12 @@ handleAddStars = (rating) => {
               status={httpResponse.status}
             />
           )}
-
+          <label className="form__label" htmlFor="name">
+              Name
+            </label>
           <div className="form-group">
             <input
-              className="input"
+              className="form__input"
               id="name"
               type="text"
               name="name"
@@ -170,10 +168,13 @@ handleAddStars = (rating) => {
             />
           </div>
 
+          <label className="form__label" htmlFor="description">
+              Description
+            </label>
           <div className="form-group">
          
             <textarea
-              className="input"
+              className="brewery__description"
               id="description"
               type="text"
               name="description"
@@ -181,16 +182,21 @@ handleAddStars = (rating) => {
             ></textarea>
           </div>
 
-          <div className="form-group">
+
+           <label className="form__label" htmlFor="rating">
+                Star rating
+            </label>
             <ReviewRating setRate={this.handleAddStars} />
-          </div>
+          
 
-          <div className="form-group">
-            <h2>Current brewery address: {address}</h2>
+        
+            <h2 className="form__label">Current brewery address: {address}</h2>
             <AddressSearch onSelect={this.handleAddressSelect} />
-          </div>
+         
 
-          <div className="form-group">
+            <label className="form__label" htmlFor="name">
+              Website
+            </label>
             <input
                   className="form__input"
                   onChange={this.handleChange}
@@ -199,11 +205,13 @@ handleAddStars = (rating) => {
                   name="website"
                   id="website"
                 />
-           </div>
-          <div className="form-group">
-           
+         
+            
+            <label className="form__label" htmlFor="year">
+                Brewery established in
+              </label>
             <input
-              className="input"
+              className="form__input-small"
               id="establisheddate"
               type="number"
               name="establisheddate"
@@ -211,8 +219,8 @@ handleAddStars = (rating) => {
               defaultValue={establisheddate}
             />
          
-          </div>
-          <Button primary>
+          
+          <Button  className="btn-submit" primary>
             Save
           </Button>
         </form>

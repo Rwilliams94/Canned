@@ -138,17 +138,18 @@ handleDeleteBeer = (beerId) => {
    
 
     return (
-      <section className="form-section">
-        <form autoComplete="off" className="form" onSubmit={this.handleSubmit}>
-          <h1 className="header">Edit this can <span onClick={this.props.handleClose}>X</span></h1>
+      <section className="updatebeer__form-main">
+        <form autoComplete="off" className="beer__form" onSubmit={this.handleSubmit}>
+          <h3 className="header">Edit this can <span onClick={this.props.handleClose}>X</span></h3>
 
-          <div className="round-image widget-image">
+          <div className="flex-center">
             <img
+            className="upload__image"
               src={this.state.tmpUrl || this.props.beer.image}
               alt={name}
             />
           </div>
-          <div className="form-group-uploadwidget">
+          <div className="newbeer__image-output">
             <UploadWidget
               // ref={this.imageRef}
               onFileSelect={this.handleFileSelect}
@@ -167,7 +168,7 @@ handleDeleteBeer = (beerId) => {
 
           <div className="form-group">
             <input
-              className="input"
+              className="form__input"
               id="name"
               type="text"
               name="name"
@@ -179,7 +180,7 @@ handleDeleteBeer = (beerId) => {
           <div className="form-group">
          
             <textarea
-              className="input"
+              className="beer__description"
               id="description"
               type="text"
               name="description"
@@ -187,16 +188,20 @@ handleDeleteBeer = (beerId) => {
             ></textarea>
           </div>
 
-          <div className="form-group">
+          <label className="form__label" htmlFor="rating">
+                Star rating
+            </label>
             <ReviewRating setRate={this.handleAddStars} />
-          </div>
+        
 
-          <div className="form-group">
-            <h2>Current brewery: {breweryname}</h2>
+
+            <h2 className="form__label">Current brewery: {breweryname}</h2>
             <BrewSearchBar onSelect={this.handleBrewerySelect} />
-          </div>
 
-          <div className="form-group">
+
+            <label className="form__label" htmlFor="abv">
+                ABV
+              </label>
             <input
                   className="form__input"
                   onChange={this.handleChange}
@@ -205,11 +210,13 @@ handleDeleteBeer = (beerId) => {
                   name="abv"
                   id="abv"
                 />
-           </div>
-          <div className="form-group">
+         
+         <label className="form__label" htmlFor="year">
+                Release date
+              </label>
            
             <input
-              className="input"
+              className="form__input"
               id="releasedate"
               type="number"
               name="releasedate"
@@ -217,13 +224,12 @@ handleDeleteBeer = (beerId) => {
               defaultValue={releasedate}
             />
          
-          </div>
-          <Button primary>
+          <Button primary className="btn-submit">
             Save
           </Button>
         </form>
 
-        <h3>Or, if you're sure... <b onClick={() => this.handleDeleteBeer(_id)}>delete</b> this beer</h3>
+        <h3 className="settings">Or, if you're sure... <b onClick={() => this.handleDeleteBeer(_id)}>delete</b> this beer</h3>
       </section>
     );
   }

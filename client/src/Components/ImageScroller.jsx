@@ -75,7 +75,7 @@ export class ImageScroller extends Component {
               <p className="settings" onClick={this.handleDeleteImage}>delete this image?</p>
             </div>
             )}
-            {this.state.photos.length === 0 ? (<div><h2>no photos to display</h2></div>) :
+            {this.state.photos.length === 0 ? (<div><h4>no photos to display</h4></div>) :
             (<div className="image__gallery-box ">
               <p onClick={this.handlePreviousPhoto}>{`<`}</p>
               <div className="image__gallery-grid">

@@ -179,7 +179,7 @@ export class BeerDetails extends Component {
             {/* settings */}
 
             {this.state.showSettings && (
-              <div className="overflow settings-box">
+              <div className="settings-box overflow">
                 <UpdateBeer
                   beer={this.state.beer}
                   handleChange={this.handleBeerChange}

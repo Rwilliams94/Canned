@@ -72,7 +72,8 @@
     position: absolute;
     z-index: 2;
     width: 100vw;
-    height: 60vh;
+    height: 40vh;
+    max-height: 60vh;
     top: 14vh;
     padding: 1vh 0;
     background: whitesmoke;
@@ -135,4 +136,63 @@
     margin: 1vh 0 3vh 0;
     border-radius: 8px;
     border: 1px solid #5663ff;
+}
+
+
+/* beer */
+
+.beer__form-main {
+    position: absolute;
+    z-index: 2;
+    width: 100vw;
+    max-height: 85vh;
+    height: 70vh;
+    top: 17vh;
+    padding: 1vh 0;
+    background: whitesmoke;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.updatebeer__form-main {
+    width: 100vw;
+    max-height: 85vh;
+    height: 70vh;
+    top: 17vh;
+    padding: 1vh 0;
+    background: whitesmoke;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+
+}
+
+.beer__form {
+ height: 80vh;
+ display: flex;
+ align-items: center;
+ flex-direction: column;
+ width: 100vw;
+}
+
+.beer__description {
+    padding: 5px;
+    height: 10vh;
+    width: 85vw;
+    margin: 1vh 0 3vh 0;
+    border-radius: 8px;
+    border: 1px solid #5663ff;
+}
+
+.beer__form-search {
+    height: 7vh;
+    width: 100vw;
+    border-radius: 12px;
+    margin-bottom: 1vh;
+    background:  #001f3f;
 }
